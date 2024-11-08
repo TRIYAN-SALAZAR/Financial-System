@@ -14,19 +14,20 @@ void recharge_airtime();
 void change_nip();
 
 struct Users data_users[];
+struct Sesion sesion;
 
 int main(){
     strcpy(data_users[0].name, "Jorge");
     strcpy(data_users[0].lastname, "Ozuna");
     data_users[0].nip = 3434;
-    data_users[0].number_card = 34342309324;
-    data_users[0].phone_number = 3315660281;
+    strcpy(data_users[0].number_card, "34342309324");
+    strcpy(data_users[0].phone_number, "3315660281");
 
     strcpy(data_users[1].name, "Emma");
     strcpy(data_users[1].lastname, "Myers");
     data_users[1].nip = 7777;
-    data_users[1].number_card = 99999999999;
-    data_users[1].phone_number = 903298493984;
+    strcpy(data_users[1].number_card, "9999999999");
+    strcpy(data_users[1].phone_number, "903298493984");
 
     int i;
     for(i = 0; i < 2; i++) {

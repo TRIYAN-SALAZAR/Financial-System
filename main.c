@@ -17,6 +17,8 @@ struct Users data_users[];
 struct Sesion sesion;
 
 int main(){
+    // This is an example that as working with structs in C
+
     strcpy(data_users[0].name, "Jorge");
     strcpy(data_users[0].lastname, "Ozuna");
     data_users[0].nip = 3434;
@@ -39,7 +41,23 @@ int main(){
         printf("\nNumber phone: %lld", data_users[i].phone_number);
     }
 
+    // Write the code below
+
     getch();
     return 0;
 }
+
+void menu_principal() {}
+
+void add_new_user() {}
+
+void deposit_own_acc() {}
+
+void check_card() {}
+
+void transfer_money() {}
+
+void recharge_airtime() {}
+
+void change_nip() {}
 

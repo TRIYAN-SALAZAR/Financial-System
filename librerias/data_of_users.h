@@ -9,12 +9,6 @@ struct Users {
     int nip;
 };
 
-struct Sesion {
-    int is_active = 0;
-    char phone_number[10];
-};
-
-extern struct Sesion sesion;
 extern struct Users data_users[];
 
 #endif // DATA_OF_USERS_H_INCLUDED

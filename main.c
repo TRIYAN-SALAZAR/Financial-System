@@ -13,9 +13,9 @@ void transfer_money();
 void recharge_airtime();
 void change_nip();
 void close_sesion();
+int is_sesion_active();
 
 struct Users data_users[];
-struct Sesion sesion;
 
 int main(){
     // This is an example that as working with structs in C
@@ -43,8 +43,9 @@ int main(){
     }
 
     // Write the code below
-    char opt;
     do {
+        char opt;
+        menu_principal();
 
         switch (opt) {
             case 1:
@@ -71,8 +72,15 @@ int main(){
 }
 
 void menu_principal() {
-    printf("Que movimiento deseas realizar");
-    if(sesion.is_active == 1) {
+    printf("\n¿Que movimiento deseas realizar?");
+    printf("\n1 - Agregar nuevo usuario");
+    printf("\n2 - Depositar en mi cuenta");
+    printf("\n3 - Verificar saldo de tarjeta");
+    printf("\n4 - Transferir dinero");
+    printf("\n5 - Recargar tiempo aire");
+    printf("\n6 - Cambiar nip");
+
+    if(is_sesion_active()) {
         printf("7 - Salir");
     }
 }
@@ -91,3 +99,10 @@ void change_nip() {}
 
 void close_sesion() {}
 
+int is_sesion_active() {
+    if(sesion.is_active == 1) {
+        return 1;
+    }
+
+    return 0;
+}

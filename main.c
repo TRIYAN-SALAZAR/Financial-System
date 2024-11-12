@@ -12,6 +12,7 @@ void check_card();
 void transfer_money();
 void recharge_airtime();
 void change_nip();
+void close_sesion();
 
 struct Users data_users[];
 struct Sesion sesion;
@@ -42,12 +43,39 @@ int main(){
     }
 
     // Write the code below
+    char opt;
+    do {
 
+        switch (opt) {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                close_sesion();
+                break;
+            default:
+                
+        }
+    } while(1 == 1);
     getch();
     return 0;
 }
 
-void menu_principal() {}
+void menu_principal() {
+    printf("Que movimiento deseas realizar");
+    if(sesion.is_active == 1) {
+        printf("7 - Salir");
+    }
+}
 
 void add_new_user() {}
 
@@ -60,4 +88,6 @@ void transfer_money() {}
 void recharge_airtime() {}
 
 void change_nip() {}
+
+void close_sesion() {}
 

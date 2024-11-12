@@ -22,13 +22,21 @@ int main(){
 
     strcpy(data_users[0].name, "Jorge");
     strcpy(data_users[0].lastname, "Ozuna");
-    data_users[0].nip = 3434;
+    data_users[0].nip[0] = 3;
+    data_users[0].nip[1] = 4;
+    data_users[0].nip[2] = 4;
+    data_users[0].nip[3] = 5;
+    
     strcpy(data_users[0].number_card, "34342309324");
     strcpy(data_users[0].phone_number, "3315660281");
 
     strcpy(data_users[1].name, "Emma");
     strcpy(data_users[1].lastname, "Myers");
-    data_users[1].nip = 7777;
+    data_users[1].nip[0] = 7;
+    data_users[1].nip[1] = 5;
+    data_users[1].nip[2] = 3;
+    data_users[1].nip[3] = 8;
+
     strcpy(data_users[1].number_card, "9999999999");
     strcpy(data_users[1].phone_number, "903298493984");
 

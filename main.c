@@ -77,7 +77,23 @@ void menu_principal() {
     }
 }
 
-void add_new_user() {}
+void add_new_user() {
+    char name[50];
+    char lastname[50];
+    char phone_number[10];
+    char number_card[16];
+    int nip[4];
+    printf("Ingresa tu nombre: ");
+    scanf("%s", data_users[1].name);
+    printf("Ingresa tu apellido: ");
+    scanf("%s", data_users[1].lastname);
+    printf("Ingresa tu numero de telefono: ");
+    scanf("%s", data_users[1].phone_number);
+    printf("Ingresa el numero de tu tarjeta: ");
+    scanf("%s", data_users[1].number_card);
+    printf("Ingresa tu nip de 4 digitos: ");
+    scanf("%i", data_users[1].nip);
+}
 
 void deposit_own_acc() {}
 

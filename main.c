@@ -93,7 +93,9 @@ void menu_principal() {
     }
 }
 
-void add_new_user() {}
+void add_new_user() {
+    printf("Un ejemplo para un commit");
+}
 
 void deposit_own_acc() {}
 

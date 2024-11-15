@@ -6,7 +6,8 @@ struct Users {
     char lastname[50];
     char phone_number[10];
     char number_card[16];
-    int nip[];
+    int nip[4];
+    int saldo;
 };
 
 extern struct Users data_users[];

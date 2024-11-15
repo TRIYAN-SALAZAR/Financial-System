@@ -130,6 +130,7 @@ void add_new_user() {
     }
     data_users[cont_users] = u1; //Guardar los datos ingresados en el arreglo del struct 
     cont_users++;//aumento para saber cuántos usuarios hay realmente 
+    printf("Tu registro fue exitoso, regresando al menu...");
 }
 
 void deposit_own_acc() {}

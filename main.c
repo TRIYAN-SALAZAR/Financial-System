@@ -18,7 +18,22 @@ int is_sesion_active();
 struct Users data_users[];
 
 int main(){
+    //Necesarios para la función add_new_user
+    int num_users=0, cont_users=0, i;// variables globales
+    printf("Cuántos usuarios quieres agregar? ");
+    scanf("%i", &num_users); //Leer cuántos usuarios quiere agregar
+    
+    for(i=0; i < num_users; i++){
+        printf("Asignando datos al usuario %i\n", i+1);
+        add_new_user(cont_users); //invocacion de funcion con paso de parametros
+        cont_users++; //contador de usuarios 
+    }
+
+    
     // This is an example that as working with structs in C
+    printf("\n%s", data_users[0].name);
+    printf("\n%s", data_users[1].name);
+    printf("%i", cont_users);
 
     strcpy(data_users[0].name, "Jorge");
     strcpy(data_users[0].lastname, "Ozuna");
@@ -93,13 +108,8 @@ void menu_principal() {
     }
 }
 
-void add_new_user() {
+void add_new_user(int cont_users) {
     
-    /*char name[50];
-    char lastname[50];
-    char phone_number[10];
-    char number_card[16];
-    int nip[4];*/
     struct Users u1; //En el caso del usuario 1, si queremos poner más, podemos hacer cases con un switch.
     printf("Ingresa tu nombre: ");
     scanf("%49s", u1.name); //se pone %49 en vez de 50 para dejar el espacio del \0.
@@ -118,7 +128,7 @@ void add_new_user() {
         printf("Ingresa el dígito %i: ", i+1);
         scanf("%d", &u1.nip[i]);
     }
-    data_users[0] = u1; //Guardar los datos ingresados en el arreglo del struct
+    data_users[cont_users] = u1; //Guardar los datos ingresados en el arreglo del struct
 }
 
 void deposit_own_acc() {}

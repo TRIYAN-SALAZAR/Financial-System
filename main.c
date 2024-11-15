@@ -19,18 +19,7 @@ int cont_users=3;
 struct Users data_users[];
 
 int main(){
-    //Necesarios para la función add_new_user
-    int num_users=0, cont_users=0, i;// variables globales
-    printf("Cuántos usuarios quieres agregar? ");
-    scanf("%i", &num_users); //Leer cuántos usuarios quiere agregar
-    
-    for(i=0; i < num_users; i++){
-        printf("Asignando datos al usuario %i\n", i+1);
-        add_new_user(cont_users); //invocacion de funcion con paso de parametros
-        cont_users++; //contador de usuarios 
-    }
-
-    
+   
     // This is an example that as working with structs in C
     printf("\n%s", data_users[0].name);
     printf("\n%s", data_users[1].name);

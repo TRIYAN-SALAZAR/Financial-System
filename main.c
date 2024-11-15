@@ -94,21 +94,31 @@ void menu_principal() {
 }
 
 void add_new_user() {
-    char name[50];
+    
+    /*char name[50];
     char lastname[50];
     char phone_number[10];
     char number_card[16];
-    int nip[4];
+    int nip[4];*/
+    struct Users u1; //En el caso del usuario 1, si queremos poner más, podemos hacer cases con un switch.
     printf("Ingresa tu nombre: ");
-    scanf("%s", data_users[1].name);
+    scanf("%49s", u1.name); //se pone %49 en vez de 50 para dejar el espacio del \0.
+
     printf("Ingresa tu apellido: ");
-    scanf("%s", data_users[1].lastname);
-    printf("Ingresa tu numero de telefono: ");
-    scanf("%s", data_users[1].phone_number);
-    printf("Ingresa el numero de tu tarjeta: ");
-    scanf("%s", data_users[1].number_card);
-    printf("Ingresa tu nip de 4 digitos: ");
-    scanf("%i", data_users[1].nip);
+    scanf("%49s", u1.lastname);
+
+    printf("Ingresa tu número de teléfono (10 dígitos): ");
+    scanf("%10s", u1.phone_number);
+
+    printf("Ingresa tu número de tarjeta (16 dígitos): ");
+    scanf("%16s", u1.number_card);
+
+    printf("Ingresa tu NIP de 4 dígitos: \n");
+    for (int i = 0; i < 4; i++) {  //este es un ciclo que lee número por número de su NIP
+        printf("Ingresa el dígito %i: ", i+1);
+        scanf("%d", &u1.nip[i]);
+    }
+    data_users[0] = u1; //Guardar los datos ingresados en el arreglo del struct
 }
 
 void deposit_own_acc() {}

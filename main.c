@@ -12,16 +12,14 @@ void check_card();
 void transfer_money();
 void recharge_airtime();
 void change_nip();
+void show_users();
+
 int cont_users=3;
 
 struct Users data_users[50];
 
 int main(){
-   
     // This is an example that as working with structs in C
-    printf("\n%s", data_users[0].name);
-    printf("\n%s", data_users[1].name);
-    printf("%i", cont_users);
 
     strcpy(data_users[0].name, "Jorge");
     strcpy(data_users[0].lastname, "Ozuna");
@@ -30,8 +28,8 @@ int main(){
     data_users[0].nip[2] = 4;
     data_users[0].nip[3] = 5;
 
-    strcpy(data_users[0].number_card, "34342309324");
-    strcpy(data_users[0].phone_number, "3315660281");
+    strcpy(data_users[0].number_card, "12341234234");
+    strcpy(data_users[0].phone_number, "3316787878");
 
     strcpy(data_users[1].name, "Emma");
     strcpy(data_users[1].lastname, "Myers");
@@ -40,31 +38,32 @@ int main(){
     data_users[1].nip[2] = 3;
     data_users[1].nip[3] = 8;
 
-    strcpy(data_users[1].number_card, "9999999999");
-    strcpy(data_users[1].phone_number, "903298493984");
+    strcpy(data_users[1].number_card, "8128987623983201");
+    strcpy(data_users[1].phone_number, "0932938765");
 
-    int i;
-    for(i = 0; i < 2; i++) {
-        printf("\n--------------------------");
-        printf("\nNombre: %s", data_users[i].name);
-        printf("\nApellido: %s", data_users[i].lastname);
-        printf("\nNip: %d", data_users[i].nip);
-        printf("\nNumber card: %lld", data_users[i].number_card);
-        printf("\nNumber phone: %lld", data_users[i].phone_number);
-    }
+    strcpy(data_users[2].name, "Rogelio");
+    strcpy(data_users[2].lastname, "Zoro");
+    data_users[2].nip[0] = 7;
+    data_users[2].nip[1] = 5;
+    data_users[2].nip[2] = 3;
+    data_users[2].nip[3] = 8;
+
+    strcpy(data_users[2].number_card, "8128987623983201");
+    strcpy(data_users[2].phone_number, "0932938765");
 
     // Write the code below
     int band = 1;
     do {
-        int opt;
         system("cls");
         fflush(stdin);
+        int opt;
 
         menu_principal();
         scanf("%d", &opt);
 
         switch (opt) {
             case 1:
+                add_new_user();
                 break;
             case 2:
                 break;
@@ -83,6 +82,7 @@ int main(){
                 break;
         }
     } while(band == 1);
+    show_users();
     getch();
     return 0;
 }
@@ -101,7 +101,7 @@ void menu_principal() {
 }
 
 void add_new_user() {
-    struct Users u1; 
+    struct Users u1;
     printf("Ingresa tu nombre: ");
     scanf("%49s", u1.name); //se pone %49 en vez de 50 para dejar el espacio del \0.
 
@@ -120,8 +120,8 @@ void add_new_user() {
         scanf("%d", &u1.nip[i]);
     }
     u1.saldo=0;
-    data_users[cont_users] = u1; //Guardar los datos ingresados en el arreglo del struct 
-    cont_users++;//aumento para saber cuántos usuarios hay realmente 
+    data_users[cont_users] = u1; //Guardar los datos ingresados en el arreglo del struct
+    cont_users++;//aumento para saber cuántos usuarios hay realmente
     printf("Tu registro fue exitoso, regresando al menu...");
 }
 
@@ -134,3 +134,22 @@ void transfer_money() {}
 void recharge_airtime() {}
 
 void change_nip() {}
+
+void show_users() {
+    int i, j;
+    printf("MOSTRAR USUARIOS");
+    for(i = 0; i < cont_users; i++) {
+        printf("\n--------------------------");
+        printf("\nNombre: %s", data_users[i].name);
+        printf("\nApellido: %s", data_users[i].lastname);
+        printf("\nNumber phone: %s", data_users[i].phone_number);
+        printf("\nNumber card: ");
+        for(j = 0; j < 16; j++) {
+            printf("%c", data_users[i].number_card[j]);
+        }
+        printf("\nNIP: ");
+        for(j = 0; j < 4; j++) {
+            printf("%d", data_users[i].nip[j]);
+        }
+    }
+}

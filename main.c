@@ -12,10 +12,8 @@ void check_card();
 void transfer_money();
 void recharge_airtime();
 void change_nip();
-void close_sesion();
-int is_sesion_active();
 
-struct Users data_users[];
+struct Users data_users[50];
 
 int main(){
     // This is an example that as working with structs in C
@@ -26,7 +24,7 @@ int main(){
     data_users[0].nip[1] = 4;
     data_users[0].nip[2] = 4;
     data_users[0].nip[3] = 5;
-    
+
     strcpy(data_users[0].number_card, "34342309324");
     strcpy(data_users[0].phone_number, "3315660281");
 
@@ -51,9 +49,14 @@ int main(){
     }
 
     // Write the code below
+    int band = 1;
     do {
-        char opt;
+        int opt;
+        system("cls");
+        fflush(stdin);
+
         menu_principal();
+        scanf("%d", &opt);
 
         switch (opt) {
             case 1:
@@ -69,17 +72,18 @@ int main(){
             case 6:
                 break;
             case 7:
-                close_sesion();
+                band = 0;
                 break;
             default:
-                
+                break;
         }
-    } while(1 == 1);
+    } while(band == 1);
     getch();
     return 0;
 }
 
 void menu_principal() {
+    printf("\n");
     printf("\n¿Que movimiento deseas realizar?");
     printf("\n1 - Agregar nuevo usuario");
     printf("\n2 - Depositar en mi cuenta");
@@ -87,10 +91,8 @@ void menu_principal() {
     printf("\n4 - Transferir dinero");
     printf("\n5 - Recargar tiempo aire");
     printf("\n6 - Cambiar nip");
-
-    if(is_sesion_active()) {
-        printf("7 - Salir");
-    }
+    printf("\n7 - Salir");
+    printf("\nIngrese su opcion: ");
 }
 
 void add_new_user() {}
@@ -104,13 +106,3 @@ void transfer_money() {}
 void recharge_airtime() {}
 
 void change_nip() {}
-
-void close_sesion() {}
-
-int is_sesion_active() {
-    if(sesion.is_active == 1) {
-        return 1;
-    }
-
-    return 0;
-}

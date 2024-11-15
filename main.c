@@ -12,11 +12,16 @@ void check_card();
 void transfer_money();
 void recharge_airtime();
 void change_nip();
+int cont_users=3;
 
 struct Users data_users[50];
 
 int main(){
+   
     // This is an example that as working with structs in C
+    printf("\n%s", data_users[0].name);
+    printf("\n%s", data_users[1].name);
+    printf("%i", cont_users);
 
     strcpy(data_users[0].name, "Jorge");
     strcpy(data_users[0].lastname, "Ozuna");
@@ -95,7 +100,30 @@ void menu_principal() {
     printf("\nIngrese su opcion: ");
 }
 
-void add_new_user() {}
+void add_new_user() {
+    struct Users u1; 
+    printf("Ingresa tu nombre: ");
+    scanf("%49s", u1.name); //se pone %49 en vez de 50 para dejar el espacio del \0.
+
+    printf("Ingresa tu apellido: ");
+    scanf("%49s", u1.lastname);
+
+    printf("Ingresa tu número de teléfono (10 dígitos): ");
+    scanf("%10s", u1.phone_number);
+
+    printf("Ingresa tu número de tarjeta (16 dígitos): ");
+    scanf("%16s", u1.number_card);
+
+    printf("Ingresa tu NIP de 4 dígitos: \n");
+    for (int i = 0; i < 4; i++) {  //este es un ciclo que lee número por número de su NIP
+        printf("Ingresa el dígito %i: ", i+1);
+        scanf("%d", &u1.nip[i]);
+    }
+    u1.saldo=0;
+    data_users[cont_users] = u1; //Guardar los datos ingresados en el arreglo del struct 
+    cont_users++;//aumento para saber cuántos usuarios hay realmente 
+    printf("Tu registro fue exitoso, regresando al menu...");
+}
 
 void deposit_own_acc() {}
 

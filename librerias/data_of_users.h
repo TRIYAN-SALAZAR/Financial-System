@@ -10,6 +10,6 @@ struct Users {
     int saldo;
 };
 
-extern struct Users data_users[];
+extern struct Users data_users[50];
 
 #endif // DATA_OF_USERS_H_INCLUDED

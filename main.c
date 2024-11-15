@@ -14,6 +14,7 @@ void recharge_airtime();
 void change_nip();
 void close_sesion();
 int is_sesion_active();
+int cont_users=3;
 
 struct Users data_users[];
 
@@ -108,9 +109,8 @@ void menu_principal() {
     }
 }
 
-void add_new_user(int cont_users) {
-    
-    struct Users u1; //En el caso del usuario 1, si queremos poner más, podemos hacer cases con un switch.
+void add_new_user() {
+    struct Users u1; 
     printf("Ingresa tu nombre: ");
     scanf("%49s", u1.name); //se pone %49 en vez de 50 para dejar el espacio del \0.
 
@@ -128,7 +128,8 @@ void add_new_user(int cont_users) {
         printf("Ingresa el dígito %i: ", i+1);
         scanf("%d", &u1.nip[i]);
     }
-    data_users[cont_users] = u1; //Guardar los datos ingresados en el arreglo del struct
+    data_users[cont_users] = u1; //Guardar los datos ingresados en el arreglo del struct 
+    cont_users++;//aumento para saber cuántos usuarios hay realmente 
 }
 
 void deposit_own_acc() {}

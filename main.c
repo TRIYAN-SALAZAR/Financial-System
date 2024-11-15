@@ -133,11 +133,3 @@ void recharge_airtime() {}
 void change_nip() {}
 
 void close_sesion() {}
-
-int is_sesion_active() {
-    if(sesion.is_active == 1) {
-        return 1;
-    }
-
-    return 0;
-}

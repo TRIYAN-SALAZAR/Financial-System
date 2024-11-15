@@ -12,10 +12,11 @@ void check_card();
 void transfer_money();
 void recharge_airtime();
 void change_nip();
-void close_sesion();
-int is_sesion_active();
+void show_users();
 
-struct Users data_users[];
+int cont_users=3;
+
+struct Users data_users[50];
 
 int main(){
     // This is an example that as working with structs in C
@@ -26,9 +27,9 @@ int main(){
     data_users[0].nip[1] = 4;
     data_users[0].nip[2] = 4;
     data_users[0].nip[3] = 5;
-    
-    strcpy(data_users[0].number_card, "34342309324");
-    strcpy(data_users[0].phone_number, "3315660281");
+
+    strcpy(data_users[0].number_card, "12341234234");
+    strcpy(data_users[0].phone_number, "3316787878");
 
     strcpy(data_users[1].name, "Emma");
     strcpy(data_users[1].lastname, "Myers");
@@ -37,26 +38,32 @@ int main(){
     data_users[1].nip[2] = 3;
     data_users[1].nip[3] = 8;
 
-    strcpy(data_users[1].number_card, "9999999999");
-    strcpy(data_users[1].phone_number, "903298493984");
+    strcpy(data_users[1].number_card, "8128987623983201");
+    strcpy(data_users[1].phone_number, "0932938765");
 
-    int i;
-    for(i = 0; i < 2; i++) {
-        printf("\n--------------------------");
-        printf("\nNombre: %s", data_users[i].name);
-        printf("\nApellido: %s", data_users[i].lastname);
-        printf("\nNip: %d", data_users[i].nip);
-        printf("\nNumber card: %lld", data_users[i].number_card);
-        printf("\nNumber phone: %lld", data_users[i].phone_number);
-    }
+    strcpy(data_users[2].name, "Rogelio");
+    strcpy(data_users[2].lastname, "Zoro");
+    data_users[2].nip[0] = 7;
+    data_users[2].nip[1] = 5;
+    data_users[2].nip[2] = 3;
+    data_users[2].nip[3] = 8;
+
+    strcpy(data_users[2].number_card, "8128987623983201");
+    strcpy(data_users[2].phone_number, "0932938765");
 
     // Write the code below
+    int band = 1;
     do {
-        char opt;
+        system("cls");
+        fflush(stdin);
+        int opt;
+
         menu_principal();
+        scanf("%d", &opt);
 
         switch (opt) {
             case 1:
+                add_new_user();
                 break;
             case 2:
                 break;
@@ -69,17 +76,19 @@ int main(){
             case 6:
                 break;
             case 7:
-                close_sesion();
+                band = 0;
                 break;
             default:
-                
+                break;
         }
-    } while(1 == 1);
+    } while(band == 1);
+    show_users();
     getch();
     return 0;
 }
 
 void menu_principal() {
+    printf("\n");
     printf("\n¿Que movimiento deseas realizar?");
     printf("\n1 - Agregar nuevo usuario");
     printf("\n2 - Depositar en mi cuenta");
@@ -87,14 +96,33 @@ void menu_principal() {
     printf("\n4 - Transferir dinero");
     printf("\n5 - Recargar tiempo aire");
     printf("\n6 - Cambiar nip");
-
-    if(is_sesion_active()) {
-        printf("7 - Salir");
-    }
+    printf("\n7 - Salir");
+    printf("\nIngrese su opcion: ");
 }
 
 void add_new_user() {
-    printf("Un ejemplo para un commit");
+    struct Users u1;
+    printf("Ingresa tu nombre: ");
+    scanf("%49s", u1.name); //se pone %49 en vez de 50 para dejar el espacio del \0.
+
+    printf("Ingresa tu apellido: ");
+    scanf("%49s", u1.lastname);
+
+    printf("Ingresa tu número de teléfono (10 dígitos): ");
+    scanf("%10s", u1.phone_number);
+
+    printf("Ingresa tu número de tarjeta (16 dígitos): ");
+    scanf("%16s", u1.number_card);
+
+    printf("Ingresa tu NIP de 4 dígitos: \n");
+    for (int i = 0; i < 4; i++) {  //este es un ciclo que lee número por número de su NIP
+        printf("Ingresa el dígito %i: ", i+1);
+        scanf("%d", &u1.nip[i]);
+    }
+    u1.saldo=0;
+    data_users[cont_users] = u1; //Guardar los datos ingresados en el arreglo del struct
+    cont_users++;//aumento para saber cuántos usuarios hay realmente
+    printf("Tu registro fue exitoso, regresando al menu...");
 }
 
 void deposit_own_acc() {}
@@ -107,12 +135,21 @@ void recharge_airtime() {}
 
 void change_nip() {}
 
-void close_sesion() {}
-
-int is_sesion_active() {
-    if(sesion.is_active == 1) {
-        return 1;
+void show_users() {
+    int i, j;
+    printf("MOSTRAR USUARIOS");
+    for(i = 0; i < cont_users; i++) {
+        printf("\n--------------------------");
+        printf("\nNombre: %s", data_users[i].name);
+        printf("\nApellido: %s", data_users[i].lastname);
+        printf("\nNumber phone: %s", data_users[i].phone_number);
+        printf("\nNumber card: ");
+        for(j = 0; j < 16; j++) {
+            printf("%c", data_users[i].number_card[j]);
+        }
+        printf("\nNIP: ");
+        for(j = 0; j < 4; j++) {
+            printf("%d", data_users[i].nip[j]);
+        }
     }
-
-    return 0;
 }

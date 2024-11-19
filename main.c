@@ -125,7 +125,9 @@ void add_new_user() {
     printf("Tu registro fue exitoso, regresando al menu...");
 }
 
-void deposit_own_acc() {}
+void deposit_own_acc() {
+	puto ozuna como caga palo
+}
 
 void check_card() {}
 

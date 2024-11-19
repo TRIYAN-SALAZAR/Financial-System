@@ -126,7 +126,7 @@ void add_new_user() {
 }
 
 void deposit_own_acc() {
-	puto ozuna como caga palo
+	no es cierto lo amo
 }
 
 void check_card() {}

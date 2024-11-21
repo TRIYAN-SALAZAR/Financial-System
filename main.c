@@ -23,22 +23,19 @@ int main(){
 
     strcpy(data_users[0].name, "Jorge");
     strcpy(data_users[0].lastname, "Ozuna");
-    data_users[0].nip[0] = 3;
-    data_users[0].nip[1] = 4;
-    data_users[0].nip[2] = 4;
-    data_users[0].nip[3] = 5;
+    strcpy(data_users[0].nip, "8888");
 
     strcpy(data_users[0].number_card, "12341234234");
     strcpy(data_users[0].phone_number, "3316787878");
 
     strcpy(data_users[1].name, "Emma");
     strcpy(data_users[1].lastname, "Myers");
-    data_users[1].nip[0] = "7777";
-
     strcpy(data_users[1].number_card, "8128987623983201");
     strcpy(data_users[1].phone_number, "0932938765");
+    strcpy(data_users[1].nip, "7777");
 
-    strcpy(data_users[2].name, "Rogelio");
+
+    /*strcpy(data_users[2].name, "Rogelio");
     strcpy(data_users[2].lastname, "Zoro");
     data_users[2].nip[0] = 7;
     data_users[2].nip[1] = 5;
@@ -47,7 +44,7 @@ int main(){
 
     strcpy(data_users[2].number_card, "8128987623983201");
     strcpy(data_users[2].phone_number, "0932938765");
-
+    */
     // Write the code below
     int band = 1;
     do {
@@ -99,7 +96,7 @@ void menu_principal() {
 }
 
 void add_new_user() {
-    
+
     struct Users u1; //En el caso del usuario 1, si queremos poner más, podemos hacer cases con un switch.
     printf("Ingresa tu nombre: ");
     scanf("%49s", u1.name); //se pone %49 en vez de 50 para dejar el espacio del \0.
@@ -117,7 +114,7 @@ void add_new_user() {
     scanf("%4s", u1.nip);
 
     u1.saldo=0;
-    data_users[cont_users] = u1; //Guardar los datos ingresados en el arreglo del struct 
+    data_users[cont_users] = u1; //Guardar los datos ingresados en el arreglo del struct
     cont_users++;
     printf("Tu registro fue exitoso, regresando al menu...");
     printf("%c", data_users[cont_users].nip);
@@ -180,7 +177,7 @@ void transfer_money() {
             printf("No tienes los suficientes fondos, vuelve a intentarlo con un monto menor");
         }
     }//fin del if si puso bien sus datos
-    
+
 }
 
 void recharge_airtime() {}

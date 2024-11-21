@@ -101,7 +101,8 @@ void menu_principal() {
 }
 
 void add_new_user() {
-    struct Users u1;
+    
+    struct Users u1; //En el caso del usuario 1, si queremos poner más, podemos hacer cases con un switch.
     printf("Ingresa tu nombre: ");
     scanf("%49s", u1.name); //se pone %49 en vez de 50 para dejar el espacio del \0.
 
@@ -114,15 +115,14 @@ void add_new_user() {
     printf("Ingresa tu número de tarjeta (16 dígitos): ");
     scanf("%16s", u1.number_card);
 
-    printf("Ingresa tu NIP de 4 dígitos: \n");
-    for (int i = 0; i < 4; i++) {  //este es un ciclo que lee número por número de su NIP
-        printf("Ingresa el dígito %i: ", i+1);
-        scanf("%d", &u1.nip[i]);
-    }
+    printf("Ingresa tu NIP (4 dígitos): ");
+    scanf("%4s", u1.nip);
+
     u1.saldo=0;
-    data_users[cont_users] = u1; //Guardar los datos ingresados en el arreglo del struct
-    cont_users++;//aumento para saber cuántos usuarios hay realmente
+    data_users[cont_users] = u1; //Guardar los datos ingresados en el arreglo del struct 
+    cont_users++;
     printf("Tu registro fue exitoso, regresando al menu...");
+    printf("%c", data_users[cont_users].nip);
 }
 
 void deposit_own_acc() {}
@@ -130,7 +130,7 @@ void deposit_own_acc() {}
 void check_card() {}
 
 void transfer_money() {
-       //encontrar si el usuario existe con su numero y nip
+//encontrar si el usuario existe con su numero y nip
     char verification_pnum[10], verification_nip[4], verification_card[16];
     int i, validador=0, transferencia, verification_transfer, cliente;
     printf("\nIngresa tu numero de telefono: ");
@@ -182,6 +182,7 @@ void transfer_money() {
             printf("No tienes los suficientes fondos, vuelve a intentarlo con un monto menor");
         }
     }//fin del if si puso bien sus datos
+    
 }
 
 void recharge_airtime() {}

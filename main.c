@@ -120,7 +120,9 @@ void add_new_user() {
     printf("%c", data_users[cont_users].nip);
 }
 
-void deposit_own_acc() {}
+void deposit_own_acc() {
+	no es cierto lo amo
+}
 
 void check_card() {}
 

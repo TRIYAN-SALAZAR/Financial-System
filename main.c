@@ -23,25 +23,19 @@ int main(){
 
     strcpy(data_users[0].name, "Jorge");
     strcpy(data_users[0].lastname, "Ozuna");
-    data_users[0].nip[0] = 3;
-    data_users[0].nip[1] = 4;
-    data_users[0].nip[2] = 4;
-    data_users[0].nip[3] = 5;
+    strcpy(data_users[0].nip, "8888");
 
     strcpy(data_users[0].number_card, "12341234234");
     strcpy(data_users[0].phone_number, "3316787878");
 
     strcpy(data_users[1].name, "Emma");
     strcpy(data_users[1].lastname, "Myers");
-    data_users[1].nip[0] = 7;
-    data_users[1].nip[1] = 5;
-    data_users[1].nip[2] = 3;
-    data_users[1].nip[3] = 8;
-
     strcpy(data_users[1].number_card, "8128987623983201");
     strcpy(data_users[1].phone_number, "0932938765");
+    strcpy(data_users[1].nip, "7777");
 
-    strcpy(data_users[2].name, "Rogelio");
+
+    /*strcpy(data_users[2].name, "Rogelio");
     strcpy(data_users[2].lastname, "Zoro");
     data_users[2].nip[0] = 7;
     data_users[2].nip[1] = 5;
@@ -50,11 +44,11 @@ int main(){
 
     strcpy(data_users[2].number_card, "8128987623983201");
     strcpy(data_users[2].phone_number, "0932938765");
-
+    */
     // Write the code below
     int band = 1;
     do {
-        system("cls");
+        //system("cls");
         fflush(stdin);
         int opt;
 
@@ -66,6 +60,7 @@ int main(){
                 add_new_user();
                 break;
             case 2:
+                transfer_money();
                 break;
             case 3:
                 break;
@@ -101,7 +96,7 @@ void menu_principal() {
 }
 
 void add_new_user() {
-    
+
     struct Users u1; //En el caso del usuario 1, si queremos poner más, podemos hacer cases con un switch.
     printf("Ingresa tu nombre: ");
     scanf("%49s", u1.name); //se pone %49 en vez de 50 para dejar el espacio del \0.
@@ -119,7 +114,7 @@ void add_new_user() {
     scanf("%4s", u1.nip);
 
     u1.saldo=0;
-    data_users[cont_users] = u1; //Guardar los datos ingresados en el arreglo del struct 
+    data_users[cont_users] = u1; //Guardar los datos ingresados en el arreglo del struct
     cont_users++;
     printf("Tu registro fue exitoso, regresando al menu...");
     printf("%c", data_users[cont_users].nip);
@@ -146,14 +141,14 @@ void transfer_money() {
                 cliente = i; //para si se llega a concluir, saber a quien quitarle dinero
                 validador = 1; //si sus datos estan bien, seguimos con la siguiente parte
             }
-        
-        } 
+
+        }
     }
     if(validador == 0){
         printf("Los datos ingresados son erroneos");
     }
-    
-    if(validador == 1){//inicio del if si puso bien sus datos 
+
+    if(validador == 1){//inicio del if si puso bien sus datos
         printf("Ingresa cuanto quieres transferir: ");
         scanf("%i", &transferencia);
         if( data_users[cliente].saldo > transferencia){
@@ -161,7 +156,7 @@ void transfer_money() {
             scanf("%s", verification_card);
             for(i=0;i<cont_users;i++){
                 if (strcmp(verification_card, data_users[i].number_card) == 0) {
-                    printf("El numero de cuenta %s pertenece a %s %s",verification_card, data_users[i].name, data_users[i].lastname); 
+                    printf("El numero de cuenta %s pertenece a %s %s",verification_card, data_users[i].name, data_users[i].lastname);
                     printf("\nEstas seguro de que quieres transferirle %i pesos? \n1.Si 2.No: ", transferencia);
                     scanf("%i", &verification_transfer);
                     if(verification_transfer == 1){
@@ -182,7 +177,7 @@ void transfer_money() {
             printf("No tienes los suficientes fondos, vuelve a intentarlo con un monto menor");
         }
     }//fin del if si puso bien sus datos
-    
+
 }
 
 void recharge_airtime() {}

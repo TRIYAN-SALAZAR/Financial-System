@@ -129,7 +129,60 @@ void deposit_own_acc() {}
 
 void check_card() {}
 
-void transfer_money() {}
+void transfer_money() {
+       //encontrar si el usuario existe con su numero y nip
+    char verification_pnum[10], verification_nip[4], verification_card[16];
+    int i, validador=0, transferencia, verification_transfer, cliente;
+    printf("\nIngresa tu numero de telefono: ");
+    scanf("%10s", verification_pnum);
+    for(i=0;i<cont_users;i++){
+        if (strcmp(verification_pnum, data_users[i].phone_number) == 0) {
+            printf("\nIngresa tu NIP: ");
+            scanf("%4s", verification_nip);
+            if (strcmp(verification_nip, data_users[i].nip) == 0){
+                printf("%s ", data_users[i].name);
+                printf("%s \n", data_users[i].lastname);
+                printf("saldo: %i\n", data_users[i].saldo);
+                cliente = i; //para si se llega a concluir, saber a quien quitarle dinero
+                validador = 1; //si sus datos estan bien, seguimos con la siguiente parte
+            }
+        
+        } 
+    }
+    if(validador == 0){
+        printf("Los datos ingresados son erroneos");
+    }
+    
+    if(validador == 1){//inicio del if si puso bien sus datos 
+        printf("Ingresa cuanto quieres transferir: ");
+        scanf("%i", &transferencia);
+        if( data_users[cliente].saldo > transferencia){
+            printf("Ingresa su numero de tarjeta: ");
+            scanf("%s", verification_card);
+            for(i=0;i<cont_users;i++){
+                if (strcmp(verification_card, data_users[i].number_card) == 0) {
+                    printf("El numero de cuenta %s pertenece a %s %s",verification_card, data_users[i].name, data_users[i].lastname); 
+                    printf("\nEstas seguro de que quieres transferirle %i pesos? \n1.Si 2.No: ", transferencia);
+                    scanf("%i", &verification_transfer);
+                    if(verification_transfer == 1){
+                        data_users[i].saldo += transferencia;
+                        data_users[cliente].saldo -= transferencia;
+                        printf("Transferencia exitosa :)");
+                    }
+                    if(verification_transfer == 0){
+                        printf("Vuelve a ingresar tus datos, regresando al menu...");
+                    }
+                }
+                else{
+                    printf("No hay ninguna tarjeta con ese numero");
+                }
+            }
+        }
+        if( data_users[cliente].saldo < transferencia){
+            printf("No tienes los suficientes fondos, vuelve a intentarlo con un monto menor");
+        }
+    }//fin del if si puso bien sus datos
+}
 
 void recharge_airtime() {}
 

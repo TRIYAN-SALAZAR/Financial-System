@@ -210,7 +210,6 @@ void recharge_airtime() {
                             printf("Todo esta bien?, quieres concluir la transferencia?\n 1.Si 2.No: ");
                             scanf("%i", &validador);
                             if(validador == 1){
-                                data_users[i].saldo += cantidad_transferencia;
                                 data_users[cliente].saldo -= cantidad_transferencia;
                                 printf("Recarga exitosa\n La recarga se hizo al numero: %s\n El monto de la recarga es: %i\n ", pnum_to_transfer[0], cantidad_transferencia);
                                 menu_principal();

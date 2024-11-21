@@ -139,7 +139,7 @@ void transfer_money() {
         if (strcmp(verification_pnum, data_users[i].phone_number) == 0) {
             printf("\nIngresa tu NIP: ");
             scanf("%4s", verification_nip);
-            if (strcmp(verification_nip, verification_nip) == 0){
+            if (strcmp(verification_nip, data_users[i].nip) == 0){
                 printf("%s ", data_users[i].name);
                 printf("%s \n", data_users[i].lastname);
                 printf("saldo: %i\n", data_users[i].saldo);

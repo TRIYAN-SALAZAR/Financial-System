@@ -4,9 +4,9 @@
 struct Users {
     char name[50];
     char lastname[50];
-    char phone_number[10];
+    char phone_number[11];
     char number_card[16];
-    int nip[4];
+    char nip[4];
     int saldo;
 };
 

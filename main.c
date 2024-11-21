@@ -33,10 +33,7 @@ int main(){
 
     strcpy(data_users[1].name, "Emma");
     strcpy(data_users[1].lastname, "Myers");
-    data_users[1].nip[0] = 7;
-    data_users[1].nip[1] = 5;
-    data_users[1].nip[2] = 3;
-    data_users[1].nip[3] = 8;
+    data_users[1].nip[0] = "7777";
 
     strcpy(data_users[1].number_card, "8128987623983201");
     strcpy(data_users[1].phone_number, "0932938765");
@@ -54,7 +51,7 @@ int main(){
     // Write the code below
     int band = 1;
     do {
-        system("cls");
+        //system("cls");
         fflush(stdin);
         int opt;
 
@@ -66,6 +63,7 @@ int main(){
                 add_new_user();
                 break;
             case 2:
+                transfer_money();
                 break;
             case 3:
                 break;
@@ -146,14 +144,14 @@ void transfer_money() {
                 cliente = i; //para si se llega a concluir, saber a quien quitarle dinero
                 validador = 1; //si sus datos estan bien, seguimos con la siguiente parte
             }
-        
-        } 
+
+        }
     }
     if(validador == 0){
         printf("Los datos ingresados son erroneos");
     }
-    
-    if(validador == 1){//inicio del if si puso bien sus datos 
+
+    if(validador == 1){//inicio del if si puso bien sus datos
         printf("Ingresa cuanto quieres transferir: ");
         scanf("%i", &transferencia);
         if( data_users[cliente].saldo > transferencia){
@@ -161,7 +159,7 @@ void transfer_money() {
             scanf("%s", verification_card);
             for(i=0;i<cont_users;i++){
                 if (strcmp(verification_card, data_users[i].number_card) == 0) {
-                    printf("El numero de cuenta %s pertenece a %s %s",verification_card, data_users[i].name, data_users[i].lastname); 
+                    printf("El numero de cuenta %s pertenece a %s %s",verification_card, data_users[i].name, data_users[i].lastname);
                     printf("\nEstas seguro de que quieres transferirle %i pesos? \n1.Si 2.No: ", transferencia);
                     scanf("%i", &verification_transfer);
                     if(verification_transfer == 1){

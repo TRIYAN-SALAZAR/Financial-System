@@ -27,6 +27,7 @@ int main(){
 
     strcpy(data_users[0].number_card, "12341234234");
     strcpy(data_users[0].phone_number, "3316787878");
+    data_users[0].saldo = 1000;
 
     strcpy(data_users[1].name, "Emma");
     strcpy(data_users[1].lastname, "Myers");
@@ -60,15 +61,19 @@ int main(){
                 add_new_user();
                 break;
             case 2:
-                transfer_money();
+                deposit_own_acc();
                 break;
             case 3:
+                check_card();
                 break;
             case 4:
+                transfer_money();
                 break;
             case 5:
+                recharge_airtime();
                 break;
             case 6:
+                change_nip();
                 break;
             case 7:
                 band = 0;
@@ -114,14 +119,16 @@ void add_new_user() {
     scanf("%4s", u1.nip);
 
     u1.saldo=0;
-    data_users[cont_users] = u1; //Guardar los datos ingresados en el arreglo del struct 
+    data_users[cont_users] = u1; //Guardar los datos ingresados en el arreglo del struct
     cont_users++;
     printf("Tu registro fue exitoso, regresando al menu...");
     printf("%c", data_users[cont_users].nip);
 
 }
 
-void deposit_own_acc() {}
+void deposit_own_acc() {
+//	no es cierto lo amo
+}
 
 void check_card() {}
 
@@ -142,14 +149,14 @@ void transfer_money() {
                 cliente = i; //para si se llega a concluir, saber a quien quitarle dinero
                 validador = 1; //si sus datos estan bien, seguimos con la siguiente parte
             }
-        
-        } 
+
+        }
     }
     if(validador == 0){
         printf("Los datos ingresados son erroneos");
     }
-    
-    if(validador == 1){//inicio del if si puso bien sus datos 
+
+    if(validador == 1){//inicio del if si puso bien sus datos
         printf("Ingresa cuanto quieres transferir: ");
         scanf("%i", &transferencia);
         if( data_users[cliente].saldo > transferencia){
@@ -157,7 +164,7 @@ void transfer_money() {
             scanf("%s", &verification_card);
             for(i=0;i<cont_users;i++){
                 if (strcmp(verification_card, data_users[i].number_card) == 0) {
-                    printf("El numero de cuenta %s pertenece a %s %s",verification_card, data_users[i].name, data_users[i].lastname); 
+                    printf("El numero de cuenta %s pertenece a %s %s",verification_card, data_users[i].name, data_users[i].lastname);
                     printf("\nEstas seguro de que quieres transferirle %i pesos? \n1.Si 2.No: ", transferencia);
                     scanf("%i", &verification_transfer);
                     if(verification_transfer == 1){
@@ -182,8 +189,8 @@ void transfer_money() {
 }
 
 void recharge_airtime() {
-        char verification_pnum[10], verification_nip[4], verification_card[16], pnum_to_transfer[0];
-    int i, new_try, validador=0, cliente, compañia, cantidad_transferencia;
+        char verification_pnum[10], verification_nip[4], verification_card[16], pnum_to_transfer[10];
+    int i, new_try, validador=0, cliente, compania, cantidad_transferencia;
     printf("\nIngresa tu numero de telefono: ");
     scanf("%10s", &verification_pnum);
     for(i=0;i<cont_users;i++){
@@ -197,44 +204,43 @@ void recharge_airtime() {
                     cliente = i; //para si se llega a concluir, saber a quien quitarle dinero
                     validador = 1; //si sus datos estan bien, seguimos con la siguiente parte
                     printf("A qué compañía quiere hacer la recarga de tiempo aire?\n 1. AT%cT 2. Telcel 3. Movistar: ", 38);
-                    scanf("%i", &compañia);
+                    scanf("%i", &compania);
                     printf("Ingresa la cantidad que quieres recargar: ");
                     scanf("%i", &cantidad_transferencia);
                     printf("A que numero quieres transferirlo?: ");
                     scanf("%s", &pnum_to_transfer[0]);
+
                         if(data_users[cliente].saldo < cantidad_transferencia){
                             printf("No tienes los fondos suficientes para hacer la transferencia, vuelve a registrar tus datos...");
-                            recharge_airtime();
                         }
+              
                         if(data_users[cliente].saldo > cantidad_transferencia){
                             printf("Todo esta bien?, quieres concluir la transferencia?\n 1.Si 2.No: ");
                             scanf("%i", &validador);
-                            if(validador == 1){
-                                data_users[cliente].saldo -= cantidad_transferencia;
-                                printf("Recarga exitosa\n La recarga se hizo al numero: %s\n El monto de la recarga es: %i\n ", pnum_to_transfer[0], cantidad_transferencia);
-                                menu_principal();
-                            }
-                            if(validador == 2){
-                                system("cls");
-                                printf("Vuelve a ingresar tus datos");
-                                menu_principal();
-                            }
+
+                          if(validador == 1){
+                              printf("Recarga exitosa\n La recarga se hizo al numero: %s\n El monto de la recarga es: %i\n ", pnum_to_transfer, cantidad_transferencia);
+
+                          }
+                          if(validador == 2){
+                              system("cls");
+                              printf("Vuelve a ingresar tus datos");
+
                         }
-            }   
+            }
         }
     }
 
-    
+
     //cuando sus datos ingresados al inicio son erroneos
     if(validador == 0){
         printf("Los datos ingresados son erroneos... \n ¿Quieres intentarlo de nuevo? 1.Si 2.No: ");
         scanf("%i", &new_try);
         if(new_try == 1){
-            recharge_airtime();
+            //recharge_airtime();
         }
         else{
             printf("Regresando al menu...");
-            menu_principal();
         }
     }
 }

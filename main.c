@@ -209,21 +209,22 @@ void recharge_airtime() {
                     scanf("%i", &cantidad_transferencia);
                     printf("A que numero quieres transferirlo?: ");
                     scanf("%s", &pnum_to_transfer[0]);
+
                         if(data_users[cliente].saldo < cantidad_transferencia){
                             printf("No tienes los fondos suficientes para hacer la transferencia, vuelve a registrar tus datos...");
-                            //recharge_airtime();
                         }
+              
                         if(data_users[cliente].saldo > cantidad_transferencia){
                             printf("Todo esta bien?, quieres concluir la transferencia?\n 1.Si 2.No: ");
                             scanf("%i", &validador);
-                        }
-                        if(validador == 1){
-                            printf("Recarga exitosa\n La recarga se hizo al numero: %s\n El monto de la recarga es: %i\n ", pnum_to_transfer, cantidad_transferencia);
 
-                        }
-                        if(validador == 2){
-                            system("cls");
-                            printf("Vuelve a ingresar tus datos");
+                          if(validador == 1){
+                              printf("Recarga exitosa\n La recarga se hizo al numero: %s\n El monto de la recarga es: %i\n ", pnum_to_transfer, cantidad_transferencia);
+
+                          }
+                          if(validador == 2){
+                              system("cls");
+                              printf("Vuelve a ingresar tus datos");
 
                         }
             }

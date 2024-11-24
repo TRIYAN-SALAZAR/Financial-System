@@ -35,22 +35,22 @@ int main()
     strcpy(data_users[1].name, "Emma");
     strcpy(data_users[1].lastname, "Myers");
 
-    memcpy(data_users[1].number_card, "4444888899991111", sizeof(data_users[1].number_card) - 1);
-    data_users[1].number_card[sizeof(data_users[1].number_card) - 1] = '\0';
+    memcpy(data_users[1].number_card, "4444888899991111", 16);
+    data_users[1].number_card[16] = '\0';
 
     strcpy(data_users[1].phone_number, "9999999999");
-    memcpy(data_users[1].nip, "1234", sizeof(data_users[1].nip) - 1);
-    data_users[1].nip[sizeof(data_users[1].nip) - 1] = '\0';
+    memcpy(data_users[1].nip, "1234", 16);
+    data_users[1].nip[4] = '\0';
 
     data_users[1].saldo = 8999000;
 
     strcpy(data_users[2].name, "Rogelio");
     strcpy(data_users[2].lastname, "Zoro");
-    memcpy(data_users[2].nip, "1234", sizeof(data_users[2].nip) - 1);
-    data_users[2].nip[sizeof(data_users[2].nip) - 1] = '\0';
+    memcpy(data_users[2].nip, "1234", 4);
+    data_users[2].nip[4] = '\0';
     data_users[2].saldo = 1000;
-    memcpy(data_users[2].number_card, "9999222211110000", sizeof(data_users[2].number_card) - 1);
-    data_users[2].number_card[sizeof(data_users[2].number_card) - 1] = '\0';
+    memcpy(data_users[2].number_card, "9999222211110000", 16);
+    data_users[2].number_card[16] = '\0';
     strcpy(data_users[2].phone_number, "1111111111");
 
     // Write the code below
@@ -157,7 +157,7 @@ void deposit_own_acc()
 
             printf("usuario encontrado %s | nip ingresado %s | nip del usuario %s", data_users[i].name, verification_nip, data_users[i].nip);
             int result = strcmp(verification_nip, data_users[i].nip);
-            
+
             if (result == 0)
             {
                 index_user = i;
@@ -172,7 +172,7 @@ void deposit_own_acc()
     {
         printf("\nLos datos ingresados son erroneos o no existe el usuario");
     }
-    
+
     if (validar == 1)
     {
         printf("\n%s", data_users[index_user].name);
@@ -187,7 +187,7 @@ void deposit_own_acc()
         getchar();
 
         if (validador == 1)
-        { 
+        {
             data_users[index_user].saldo += cant_a_depositar;
             printf("Se deposito a la cuenta de %s %s", data_users[index_user].name, data_users[index_user].lastname);
             printf("\nSe depositaron %i pesos", cant_a_depositar);
@@ -195,7 +195,7 @@ void deposit_own_acc()
             printf("\nSaldo actualizado :)");
         }
 
-        
+
     } // fin del if si puso bien sus datos
 }
 

@@ -282,49 +282,62 @@ void transfer_money()
 void change_nip()
 {
     char verification_pnum[10], verification_nip[4];
-    int i, validar = 0, phone_number, nip, validador, index_user;
-    printf("Ingresa tu numero de telefono");
+    int i, validar = 0, phone_number, nip, validador, index_user, res;
+    
+    printf("\nIngresa tu numero de telefono: ");
     scanf("%10s", verification_pnum);
+    getchar();
+
     for (i = 0; i < cont_users; i++)
     {
         if (strcmp(verification_pnum, data_users[i].phone_number) == 0)
         {
             printf("\nIngresa tu NIP: ");
             scanf("%4s", verification_nip);
-            if (strcmp(verification_nip, data_users[i].nip) == 0)
+            getchar();
+
+            res = strcmp(verification_nip, data_users[i].nip);
+
+            if (res == 0)
             {
                 index_user = i;
-                printf("Ingresa tu NIP");
-                scanf("%4s", nip);
+                validador = 1;
             }
         }
     }
+    
     if (validador == 0)
     {
-
-        printf("Los datos ingresados son erroneos");
+        printf("\nLos datos ingresados son erroneos");
     }
     else
     {
         printf("%s", data_users[index_user].name);
-        printf("%s", data_users[index_user].lastname);
-        printf("%s", data_users[index_user].nip);
+        printf(" %s", data_users[index_user].lastname);
+        printf("\n%s", data_users[index_user].nip);
+    
+        char new_nip_confirm[5], new_nip[5];
+        printf("\nIngrese su nuevo NIP: ");
+        scanf("%4s", new_nip);
+        getchar();
+
+        printf("Ingrese de nuevo su nuevo NIP: ");
+        scanf("%4s", new_nip_confirm);
+        getchar();
+
+        printf("Los NIP ingresados son: %s |y| %s", new_nip, new_nip_confirm);
+        res = strcmp(new_nip, new_nip_confirm);
+        if (res == 0)
+        {
+            strcpy(data_users[index_user].nip, new_nip);
+            printf("\nEl NIP ha sido cambiado exitosamente");
+        }
+        else
+        {
+            printf("\nLos datos no coinciden");
+        }
     }
 
-    char new_nip_confirm[4], new_nip[4];
-    printf("\nIngrese su nuevo NIP");
-    scanf("%4s", new_nip);
-
-    printf("Ingrese de nuevo su nuevo NIP");
-    scanf("%4s", new_nip_confirm);
-    if (strcmp(new_nip_confirm, new_nip) == 0)
-    {
-        printf("El NIP ha sido cambiado exitosamente");
-    }
-    else
-    {
-        printf("Los datos no coinciden");
-    }
 }
 
 void recharge_airtime()

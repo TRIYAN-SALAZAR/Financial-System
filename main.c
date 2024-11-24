@@ -24,32 +24,40 @@ int main()
 
     strcpy(data_users[0].name, "Jorge");
     strcpy(data_users[0].lastname, "Ozuna");
-    strcpy(data_users[0].nip, "1234");
 
-    strcpy(data_users[0].number_card, "12341234234");
+    memcpy(data_users[0].number_card, "1234567812345678", 16);
+    data_users[0].number_card[16] = '\0';
     strcpy(data_users[0].phone_number, "3333333333");
+    strcpy(data_users[0].nip, "3333");
+
     data_users[0].saldo = 103300;
 
     strcpy(data_users[1].name, "Emma");
     strcpy(data_users[1].lastname, "Myers");
-    strcpy(data_users[1].nip, "1234");
-    data_users[1].saldo = 8999000;
-    strcpy(data_users[1].number_card, "8128987623983201");
+
+    memcpy(data_users[1].number_card, "4444888899991111", sizeof(data_users[1].number_card) - 1);
+    data_users[1].number_card[sizeof(data_users[1].number_card) - 1] = '\0';
+
     strcpy(data_users[1].phone_number, "9999999999");
+    memcpy(data_users[1].nip, "1234", sizeof(data_users[1].nip) - 1);
+    data_users[1].nip[sizeof(data_users[1].nip) - 1] = '\0';
+
+    data_users[1].saldo = 8999000;
 
     strcpy(data_users[2].name, "Rogelio");
     strcpy(data_users[2].lastname, "Zoro");
-    strcpy(data_users[2].nip, "1234");
+    memcpy(data_users[2].nip, "1234", sizeof(data_users[2].nip) - 1);
+    data_users[2].nip[sizeof(data_users[2].nip) - 1] = '\0';
     data_users[2].saldo = 1000;
-    strcpy(data_users[2].number_card, "8128987623983201");
+    memcpy(data_users[2].number_card, "9999222211110000", sizeof(data_users[2].number_card) - 1);
+    data_users[2].number_card[sizeof(data_users[2].number_card) - 1] = '\0';
     strcpy(data_users[2].phone_number, "1111111111");
 
     // Write the code below
     int band = 1;
     do
     {
-        system("cls");
-        fflush(stdin);
+        // system("cls");
         int opt;
 
         menu_principal();
@@ -79,11 +87,14 @@ int main()
         case 7:
             band = 0;
             break;
+        case 8:
+            show_users();
+            break;
         default:
             break;
         }
     } while (band == 1);
-    show_users();
+    // show_users();
     getch();
     return 0;
 }
@@ -129,72 +140,62 @@ void add_new_user()
 
 void deposit_own_acc()
 {
-    char verification_pnum[10], verification_nip[4], verification_transfer, verification_card[16];
-    int i, validar = 0, validador, index_user, cant_a_depositar, transferencia, cliente;
-    char phone_number, nip;
-    printf("Ingresa tu numero de telefono");
-    scanf("%10s", verification_pnum);
+    char verification_pnum[10], verification_nip[4];
 
+    int i, validar = 0, validador, index_user, cant_a_depositar;
+    int transferencia, verification_transfer;
+    printf("Ingresa tu numero de telefono: ");
+    scanf("%10s", verification_pnum);
+    getchar();
     for (i = 0; i < cont_users; i++)
     {
         if (strcmp(verification_pnum, data_users[i].phone_number) == 0)
         {
             printf("\nIngresa tu NIP: ");
             scanf("%4s", verification_nip);
-            if (strcmp(verification_nip, data_users[i].nip) == 0)
+            getchar();
+
+            printf("usuario encontrado %s | nip ingresado %s | nip del usuario %s", data_users[i].name, verification_nip, data_users[i].nip);
+            int result = strcmp(verification_nip, data_users[i].nip);
+            
+            if (result == 0)
             {
                 index_user = i;
-                printf("Ingresa tu NIP");
-                scanf("%4s", nip);
-                cliente = i;
+                validar = 1;
+                printf("\nValidando datos...");
+                break;
             }
         }
     }
-    if (validador == 0)
-    {
 
-        printf("Los datos ingresados son erroneos");
-    }
-    else
+    if (validar == 0)
     {
-        printf("%s", data_users[index_user].name);
-        printf("%s", data_users[index_user].lastname);
-        printf("%s", data_users[index_user].saldo);
-        printf("Ingrese la cantidad a depositar");
-        scanf("%s", cant_a_depositar);
-        scanf("%i", &transferencia);
-        if (data_users[cliente].saldo > transferencia)
-        {
-            printf("Ingresa su numero de tarjeta: ");
-            scanf("%s", verification_card);
-            for (i = 0; i < cont_users; i++)
-            {
-                if (strcmp(verification_card, data_users[i].number_card) == 0)
-                {
-                    printf("El numero de cuenta %s pertenece a %s %s", verification_card, data_users[i].name, data_users[i].lastname);
-                    printf("\nEstas seguro de que quieres transferirle %i pesos? \n1.Si 2.No: ", transferencia);
-                    scanf("%i", &verification_transfer);
-                    if (verification_transfer == 1)
-                    {
-                        data_users[i].saldo += transferencia;
-                        data_users[cliente].saldo -= transferencia;
-                        printf("Transferencia exitosa :)");
-                    }
-                    if (verification_transfer == 0)
-                    {
-                        printf("Vuelve a ingresar tus datos, regresando al menu...");
-                    }
-                }
-                else
-                {
-                    printf("No hay ninguna tarjeta con ese numero");
-                }
-            }
+        printf("\nLos datos ingresados son erroneos o no existe el usuario");
+    }
+    
+    if (validar == 1)
+    {
+        printf("\n%s", data_users[index_user].name);
+        printf(" %s", data_users[index_user].lastname);
+        printf("\n%i", data_users[index_user].saldo);
+
+        printf("\nIngrese la cantidad a depositar: ");
+        scanf("%i", &cant_a_depositar);
+
+        printf("Todo esta correcto? \n1.Si 2.No: ");
+        scanf("%i", &validador);
+        getchar();
+
+        if (validador == 1)
+        { 
+            data_users[index_user].saldo += cant_a_depositar;
+            printf("Se deposito a la cuenta de %s %s", data_users[index_user].name, data_users[index_user].lastname);
+            printf("\nSe depositaron %i pesos", cant_a_depositar);
+            printf("\nTu saldo es de %i pesos", data_users[index_user].saldo);
+            printf("\nSaldo actualizado :)");
         }
-        if (data_users[cliente].saldo < transferencia)
-        {
-            printf("No tienes los suficientes fondos, vuelve a intentarlo con un monto menor");
-        }
+
+        
     } // fin del if si puso bien sus datos
 }
 
@@ -206,9 +207,10 @@ void check_card()
     printf("Ingresa tu numero de telefono: ");
     scanf("%10s", &number_phone);
     printf("%10s", &number_phone);
-    for (i = 0; i < cont_users; i++) {
+    for (i = 0; i < cont_users; i++)
+    {
         int res = strcmp(number_phone, data_users[i].phone_number);
-        if ( res == 0)
+        if (res == 0)
         {
             printf("\nIngresa tu NIP: ");
             scanf("%4s", &nip);
@@ -414,15 +416,18 @@ void show_users()
         printf("\nNombre: %s", data_users[i].name);
         printf("\nApellido: %s", data_users[i].lastname);
         printf("\nNumber phone: %s", data_users[i].phone_number);
+        printf("\nSaldo: %i", data_users[i].saldo);
         printf("\nNumber card: ");
         for (j = 0; j < 16; j++)
         {
             printf("%c", data_users[i].number_card[j]);
         }
+
         printf("\nNIP: ");
         for (j = 0; j < 4; j++)
         {
             printf("%d", data_users[i].nip[j]);
         }
+
     }
 }

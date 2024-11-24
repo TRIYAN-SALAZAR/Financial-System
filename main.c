@@ -21,37 +21,26 @@ struct Users data_users[50];
 int main()
 {
     // This is an example that as working with structs in C
-
     strcpy(data_users[0].name, "Jorge");
     strcpy(data_users[0].lastname, "Ozuna");
-
-    memcpy(data_users[0].number_card, "1234567812345678", 16);
-    data_users[0].number_card[16] = '\0';
     strcpy(data_users[0].phone_number, "3333333333");
+    strcpy(data_users[0].number_card, "2222333344445555");
     strcpy(data_users[0].nip, "3333");
-
     data_users[0].saldo = 103300;
 
     strcpy(data_users[1].name, "Emma");
     strcpy(data_users[1].lastname, "Myers");
-
-    memcpy(data_users[1].number_card, "4444888899991111", 16);
-    data_users[1].number_card[16] = '\0';
-
     strcpy(data_users[1].phone_number, "9999999999");
-    memcpy(data_users[1].nip, "1234", 16);
-    data_users[1].nip[4] = '\0';
-
+    strcpy(data_users[1].number_card, "4444888899991111");
+    strcpy(data_users[1].nip, "1234");
     data_users[1].saldo = 8999000;
 
     strcpy(data_users[2].name, "Rogelio");
     strcpy(data_users[2].lastname, "Zoro");
-    memcpy(data_users[2].nip, "1234", 4);
-    data_users[2].nip[4] = '\0';
-    data_users[2].saldo = 1000;
-    memcpy(data_users[2].number_card, "9999222211110000", 16);
-    data_users[2].number_card[16] = '\0';
     strcpy(data_users[2].phone_number, "1111111111");
+    strcpy(data_users[2].number_card, "9999222211110000");
+    strcpy(data_users[2].nip, "1234");
+    data_users[2].saldo = 1000;
 
     // Write the code below
     int band = 1;
@@ -155,7 +144,7 @@ void deposit_own_acc()
             scanf("%4s", verification_nip);
             getchar();
 
-            //printf("usuario encontrado %s | nip ingresado %s | nip del usuario %s", data_users[i].name, verification_nip, data_users[i].nip);
+            // printf("usuario encontrado %s | nip ingresado %s | nip del usuario %s", data_users[i].name, verification_nip, data_users[i].nip);
             int result = strcmp(verification_nip, data_users[i].nip);
 
             if (result == 0)
@@ -194,7 +183,6 @@ void deposit_own_acc()
             printf("\nTu saldo es de %i pesos", data_users[index_user].saldo);
             printf("\nSaldo actualizado :)");
         }
-
 
     } // fin del if si puso bien sus datos
 }
@@ -258,7 +246,7 @@ void transfer_money()
     { // inicio del if si puso bien sus datos
         printf("Ingresa cuanto quieres transferir: ");
         scanf("%i", &transferencia);
-        if (data_users[cliente].saldo > transferencia)
+        if (data_users[cliente].saldo >= transferencia)
         {
             printf("Ingresa su numero de tarjeta: ");
             scanf("%s", &verification_card);
@@ -286,7 +274,7 @@ void transfer_money()
                 }
             }
         }
-        if (data_users[cliente].saldo < transferencia)
+        else
         {
             printf("No tienes los suficientes fondos, vuelve a intentarlo con un monto menor");
         }
@@ -416,19 +404,9 @@ void show_users()
         printf("\n--------------------------");
         printf("\nNombre: %s", data_users[i].name);
         printf("\nApellido: %s", data_users[i].lastname);
-        printf("\nNumber phone: %s", data_users[i].phone_number);
+        printf("\nNumber phone: %s | size: %i", data_users[i].phone_number, strlen(data_users[i].phone_number));
+        printf("\nNumber card: %s | size: %i", data_users[i].number_card, strlen(data_users[i].number_card));
+        printf("\nNIP: %4s", data_users[i].nip);
         printf("\nSaldo: %i", data_users[i].saldo);
-        printf("\nNumber card: ");
-        for (j = 0; j < 16; j++)
-        {
-            printf("%c", data_users[i].number_card[j]);
-        }
-
-        printf("\nNIP: ");
-        for (j = 0; j < 4; j++)
-        {
-            printf("%d", data_users[i].nip[j]);
-        }
-
     }
 }

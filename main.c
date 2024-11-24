@@ -254,23 +254,21 @@ void transfer_money()
             {
                 if (strcmp(verification_card, data_users[i].number_card) == 0)
                 {
-                    printf("El numero de cuenta %s pertenece a %s %s", verification_card, data_users[i].name, data_users[i].lastname);
+                    printf("\nEl numero de cuenta %s pertenece a %s %s", verification_card, data_users[i].name, data_users[i].lastname);
                     printf("\nEstas seguro de que quieres transferirle %i pesos? \n1.Si 2.No: ", transferencia);
                     scanf("%i", &verification_transfer);
                     if (verification_transfer == 1)
                     {
                         data_users[i].saldo += transferencia;
                         data_users[cliente].saldo -= transferencia;
-                        printf("Transferencia exitosa :)");
+                        printf("\nSe transfirio %i pesos a %s %s", transferencia, data_users[i].name, data_users[i].lastname);
+                        printf("\nCon numero de cuenta %s", verification_card);
+                        printf("\nTransferencia exitosa :)");
                     }
                     if (verification_transfer == 0)
                     {
                         printf("Vuelve a ingresar tus datos, regresando al menu...");
                     }
-                }
-                else
-                {
-                    printf("No hay ninguna tarjeta con ese numero");
                 }
             }
         }

@@ -333,6 +333,7 @@ void recharge_airtime()
     int i, new_try, validador = 0, cliente, compania, cantidad_transferencia;
     printf("\nIngresa tu numero de telefono: ");
     scanf("%10s", &verification_pnum);
+    getchar();
     for (i = 0; i < cont_users; i++)
     {
         if (strcmp(verification_pnum, data_users[i].phone_number) == 0)
@@ -346,7 +347,7 @@ void recharge_airtime()
                 printf("saldo: %i\n", data_users[i].saldo);
                 cliente = i;   // para si se llega a concluir, saber a quien quitarle dinero
                 validador = 1; // si sus datos estan bien, seguimos con la siguiente parte
-                printf("A quÃ© compaÃ±Ã­a quiere hacer la recarga de tiempo aire?\n 1. AT%cT 2. Telcel 3. Movistar: ", 38);
+                printf("A que compania quiere hacer la recarga de tiempo aire?\n 1. AT%cT 2. Telcel 3. Movistar: ", 38);
                 scanf("%i", &compania);
                 printf("Ingresa la cantidad que quieres recargar: ");
                 scanf("%i", &cantidad_transferencia);
@@ -365,6 +366,7 @@ void recharge_airtime()
 
                     if (validador == 1)
                     {
+                        data_users[cliente].saldo = data_users[cliente].saldo - cantidad_transferencia;
                         printf("Recarga exitosa\n La recarga se hizo al numero: %s\n El monto de la recarga es: %i\n ", pnum_to_transfer, cantidad_transferencia);
                     }
                     if (validador == 2)

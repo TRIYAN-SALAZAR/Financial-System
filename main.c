@@ -155,7 +155,7 @@ void deposit_own_acc()
             scanf("%4s", verification_nip);
             getchar();
 
-            printf("usuario encontrado %s | nip ingresado %s | nip del usuario %s", data_users[i].name, verification_nip, data_users[i].nip);
+            //printf("usuario encontrado %s | nip ingresado %s | nip del usuario %s", data_users[i].name, verification_nip, data_users[i].nip);
             int result = strcmp(verification_nip, data_users[i].nip);
 
             if (result == 0)
@@ -206,6 +206,7 @@ void check_card()
 
     printf("Ingresa tu numero de telefono: ");
     scanf("%10s", &number_phone);
+    getchar();
     printf("%10s", &number_phone);
     for (i = 0; i < cont_users; i++)
     {
@@ -216,8 +217,8 @@ void check_card()
             scanf("%4s", &nip);
             if (strcmp(nip, data_users[i].nip) == 0)
             {
-                printf("%50s", data_users[i].name);
-                printf("%50s", data_users[i].lastname);
+                printf("%s ", data_users[i].name);
+                printf("%s", data_users[i].lastname);
                 printf("\nTu saldo es: %i", data_users[i].saldo);
             }
         }

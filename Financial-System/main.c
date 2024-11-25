@@ -6,6 +6,7 @@
 #include "librerias/data_of_users.h"
 
 void menu_principal();
+void menu_chiquito();
 void add_new_user();
 void deposit_own_acc();
 void check_card();
@@ -46,11 +47,12 @@ int main()
     int band = 1;
     do
     {
-        // system("cls");
         int opt;
 
         menu_principal();
         scanf("%d", &opt);
+        getchar();
+        system("cls");
 
         switch (opt)
         {
@@ -102,6 +104,13 @@ void menu_principal()
     printf("\nIngrese su opcion: ");
 }
 
+void menu_chiquito()
+{
+    printf("\n");
+    printf("\n1 - Si");
+    printf("\n7 - No");
+    printf("\nIngrese su opcion: ");
+}
 void add_new_user()
 {
     struct Users u1; // En el caso del usuario 1, si queremos poner más, podemos hacer cases con un switch.
@@ -129,62 +138,114 @@ void add_new_user()
 
 void deposit_own_acc()
 {
-    char verification_pnum[10], verification_nip[4];
-
-    int i, validar = 0, validador, index_user, cant_a_depositar;
-    int transferencia, verification_transfer;
-    printf("Ingresa tu numero de telefono: ");
-    scanf("%10s", verification_pnum);
-    getchar();
-    for (i = 0; i < cont_users; i++)
+    do
     {
-        if (strcmp(verification_pnum, data_users[i].phone_number) == 0)
+        char verification_pnum[10], verification_nip[4];
+
+        int i, validador, index_user, cant_a_depositar;
+        int transferencia, verification_transfer;
+        int validar = 0, new_try = 0;
+
+        printf("Ingresa tu numero de telefono: ");
+        scanf("%10s", verification_pnum);
+        getchar();
+        for (i = 0; i < cont_users; i++)
         {
-            printf("\nIngresa tu NIP: ");
-            scanf("%4s", verification_nip);
+            // printf("\n------------------------------------------------------");
+            // printf("\nusuario encontrado %s | nip del usuario %s\n", data_users[i].name, data_users[i].nip);
+            // printf("\n------------------------------------------------------");
+
+            if (strcmp(verification_pnum, data_users[i].phone_number) == 0)
+            {
+                printf("\nIngresa tu NIP: ");
+                scanf("%4s", verification_nip);
+                getchar();
+
+                // printf("usuario encontrado %s | nip ingresado %s | nip del usuario %s", data_users[i].name, verification_nip, data_users[i].nip);
+                int result = strcmp(verification_nip, data_users[i].nip);
+
+                if (result == 0)
+                {
+                    index_user = i;
+                    validar = 1;
+                    printf("\nValidando datos...");
+                    break;
+                }
+                else
+                {
+                    printf("\nLa clave ingresada es incorrecta");
+                    break;
+                }
+            }
+        }
+
+        if (validar == 0)
+        {
+            printf("\nLos datos ingresados son erroneos o no existe el usuario");
+            printf("\nDesea volver a intentarlo?");
+
+            menu_chiquito();
+            
+            scanf("%i", &new_try);
             getchar();
 
-            // printf("usuario encontrado %s | nip ingresado %s | nip del usuario %s", data_users[i].name, verification_nip, data_users[i].nip);
-            int result = strcmp(verification_nip, data_users[i].nip);
-
-            if (result == 0)
+            if (new_try == 1)
             {
-                index_user = i;
-                validar = 1;
-                printf("\nValidando datos...");
+                system("cls");
+                continue;
+            }
+            else
+            {
+                printf("\nRegresando al menu principal...");
                 break;
             }
         }
-    }
 
-    if (validar == 0)
-    {
-        printf("\nLos datos ingresados son erroneos o no existe el usuario");
-    }
-
-    if (validar == 1)
-    {
-        printf("\n%s", data_users[index_user].name);
-        printf(" %s", data_users[index_user].lastname);
-        printf("\n%i", data_users[index_user].saldo);
-
-        printf("\nIngrese la cantidad a depositar: ");
-        scanf("%i", &cant_a_depositar);
-
-        printf("Todo esta correcto? \n1.Si 2.No: ");
-        scanf("%i", &validador);
-        getchar();
-
-        if (validador == 1)
+        if (validar == 1)
         {
-            data_users[index_user].saldo += cant_a_depositar;
-            printf("Se deposito a la cuenta de %s %s", data_users[index_user].name, data_users[index_user].lastname);
-            printf("\nSe depositaron %i pesos", cant_a_depositar);
-            printf("\nTu saldo es de %i pesos", data_users[index_user].saldo);
-            printf("\nSaldo actualizado :)");
-        }
+            do
+            {
+                printf("\n%s", data_users[index_user].name);
+                printf(" %s", data_users[index_user].lastname);
+                printf("\n%i", data_users[index_user].saldo);
 
-    } // fin del if si puso bien sus datos
+                printf("\nIngrese la cantidad a depositar: ");
+                scanf("%i", &cant_a_depositar);
+
+                printf("Todo esta correcto? \n1.Si 2.No 3.Salir: ");
+                scanf("%i", &validador);
+                getchar();
+                if (validador == 2)
+                {
+                    system("cls");
+                    continue;
+                }
+
+                if (validador == 1) { break; }
+                
+                if (validador == 3) { break; }
+                
+
+            } while (1);
+
+            if (validador == 1)
+            {
+                data_users[index_user].saldo += cant_a_depositar;
+                printf("Se deposito a la cuenta de %s %s", data_users[index_user].name, data_users[index_user].lastname);
+                printf("\nSe depositaron %i pesos", cant_a_depositar);
+                printf("\nTu saldo es de %i pesos", data_users[index_user].saldo);
+                printf("\nSaldo actualizado :)");
+                printf("\nRegresando al menu principal...");
+                break;
+            }
+
+            if (validador == 3)
+            {
+                printf("\nRegresando al menu principal...");
+                break;
+            }
+        } // fin del if si puso bien sus datos
+    } while (1);
 }
 
 void check_card()
@@ -283,7 +344,7 @@ void change_nip()
 {
     char verification_pnum[10], verification_nip[4];
     int i, validar = 0, phone_number, nip, validador, index_user, res;
-    
+
     printf("\nIngresa tu numero de telefono: ");
     scanf("%10s", verification_pnum);
     getchar();
@@ -305,7 +366,7 @@ void change_nip()
             }
         }
     }
-    
+
     if (validador == 0)
     {
         printf("\nLos datos ingresados son erroneos");
@@ -315,7 +376,7 @@ void change_nip()
         printf("%s", data_users[index_user].name);
         printf(" %s", data_users[index_user].lastname);
         printf("\n%s", data_users[index_user].nip);
-    
+
         char new_nip_confirm[5], new_nip[5];
         printf("\nIngrese su nuevo NIP: ");
         scanf("%4s", new_nip);
@@ -337,7 +398,6 @@ void change_nip()
             printf("\nLos datos no coinciden");
         }
     }
-
 }
 
 void recharge_airtime()

@@ -51,6 +51,7 @@ int main()
 
         menu_principal();
         scanf("%d", &opt);
+
         getchar();
         system("cls");
 
@@ -82,6 +83,7 @@ int main()
             show_users();
             break;
         default:
+            printf("\nPorfavor ingrese una opcion valida");
             break;
         }
     } while (band == 1);
@@ -92,8 +94,8 @@ int main()
 
 void menu_principal()
 {
-    printf("\n");
-    printf("\nÂ¿Que movimiento deseas realizar?");
+    printf("\n------------------------------------");
+    printf("\n%cQue movimiento deseas realizar?", 168);
     printf("\n1 - Agregar nuevo usuario");
     printf("\n2 - Depositar en mi cuenta");
     printf("\n3 - Verificar saldo de tarjeta");
@@ -106,34 +108,35 @@ void menu_principal()
 
 void menu_chiquito()
 {
-    printf("\n");
     printf("\n1 - Si");
-    printf("\n7 - No");
+    printf("\n2 - No");
     printf("\nIngrese su opcion: ");
 }
 void add_new_user()
 {
     struct Users u1; // En el caso del usuario 1, si queremos poner más, podemos hacer cases con un switch.
-    printf("Ingresa tu nombre: ");
+    printf("\n------------------------------------");
+    printf("\nIngresa tu nombre: ");
     scanf("%49s", u1.name); // se pone %49 en vez de 50 para dejar el espacio del \0.
 
-    printf("Ingresa tu apellido: ");
+    printf("\nIngresa tu apellido: ");
     scanf("%49s", u1.lastname);
 
-    printf("Ingresa tu número de teléfono (10 dígitos): ");
+    printf("\nIngresa tu número de teléfono (10 dígitos): ");
     scanf("%10s", u1.phone_number);
 
-    printf("Ingresa tu número de tarjeta (16 dígitos): ");
+    printf("\nIngresa tu número de tarjeta (16 dígitos): ");
     scanf("%16s", u1.number_card);
 
-    printf("Ingresa tu NIP (4 dígitos): ");
+    printf("\nIngresa tu NIP (4 dígitos): ");
     scanf("%4s", u1.nip);
+    printf("\n------------------------------------");
 
     u1.saldo = 0;
     data_users[cont_users] = u1; // Guardar los datos ingresados en el arreglo del struct
     cont_users++;
-    printf("Tu registro fue exitoso, regresando al menu...");
-    printf("%c", data_users[cont_users].nip);
+    printf("\n\nTu registro fue exitoso, regresando al menu...\n");
+
 }
 
 void deposit_own_acc()
@@ -146,7 +149,8 @@ void deposit_own_acc()
         int transferencia, verification_transfer;
         int validar = 0, new_try = 0;
 
-        printf("Ingresa tu numero de telefono: ");
+    printf("\n------------------------------------");
+        printf("\nIngresa tu numero de telefono: ");
         scanf("%10s", verification_pnum);
         getchar();
         for (i = 0; i < cont_users; i++)
@@ -157,6 +161,7 @@ void deposit_own_acc()
 
             if (strcmp(verification_pnum, data_users[i].phone_number) == 0)
             {
+                printf("\n------------------------------------");
                 printf("\nIngresa tu NIP: ");
                 scanf("%4s", verification_nip);
                 getchar();
@@ -168,7 +173,7 @@ void deposit_own_acc()
                 {
                     index_user = i;
                     validar = 1;
-                    printf("\nValidando datos...");
+                    // printf("\n\nValidando datos...");
                     break;
                 }
                 else
@@ -180,9 +185,11 @@ void deposit_own_acc()
 
         if (validar == 0)
         {
+            printf("\n------------------------------------");
             printf("\nLos datos ingresados son erroneos o no existe el usuario");
             printf("\nDesea volver a intentarlo?");
 
+            printf("\n------------------------------------");
             menu_chiquito();
 
             scanf("%i", &new_try);
@@ -204,14 +211,17 @@ void deposit_own_acc()
         {
             do
             {
+
+                printf("\n------------------------------------");
                 printf("\n%s", data_users[index_user].name);
                 printf(" %s", data_users[index_user].lastname);
-                printf("\n%i", data_users[index_user].saldo);
+                printf("\nSaldo actual: %i", data_users[index_user].saldo);
+                printf("\n------------------------------------\n");
 
                 printf("\nIngrese la cantidad a depositar: ");
                 scanf("%i", &cant_a_depositar);
 
-                printf("Todo esta correcto? \n1.Si 2.No 3.Salir: ");
+                printf("\nTodo esta correcto? \n1.Si 2.No 3.Salir: ");
                 scanf("%i", &validador);
                 getchar();
                 if (validador == 2)
@@ -235,11 +245,14 @@ void deposit_own_acc()
             if (validador == 1)
             {
                 data_users[index_user].saldo += cant_a_depositar;
-                printf("Se deposito a la cuenta de %s %s", data_users[index_user].name, data_users[index_user].lastname);
+                printf("\n------------------------------------");
+                printf("\nEl deposito de hizo con exito!");
+                printf("\nSe deposito a la cuenta de %s %s", data_users[index_user].name, data_users[index_user].lastname);
                 printf("\nSe depositaron %i pesos", cant_a_depositar);
                 printf("\nTu saldo es de %i pesos", data_users[index_user].saldo);
-                printf("\nSaldo actualizado :)");
                 printf("\nRegresando al menu principal...");
+                getch();
+                system("cls");
                 break;
             }
 

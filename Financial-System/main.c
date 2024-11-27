@@ -118,18 +118,26 @@ void add_new_user()
     printf("\n------------------------------------");
     printf("\nIngresa tu nombre: ");
     scanf("%49s", u1.name); // se pone %49 en vez de 50 para dejar el espacio del \0.
+    getchar();
 
     printf("\nIngresa tu apellido: ");
     scanf("%49s", u1.lastname);
+    getchar();
 
     printf("\nIngresa tu número de teléfono (10 dígitos): ");
     scanf("%10s", u1.phone_number);
+    getchar();
+    fflush(stdin);
 
     printf("\nIngresa tu número de tarjeta (16 dígitos): ");
     scanf("%16s", u1.number_card);
+    getchar();
+    fflush(stdin);
 
     printf("\nIngresa tu NIP (4 dígitos): ");
     scanf("%4s", u1.nip);
+    getchar();
+    fflush(stdin);
     printf("\n------------------------------------");
 
     u1.saldo = 0;

@@ -639,16 +639,21 @@ void recharge_airtime()
 
 void show_users()
 {
-    int i, j;
-    printf("MOSTRAR USUARIOS");
-    for (i = 0; i < cont_users; i++)
-    {
-        printf("\n--------------------------");
-        printf("\nNombre: %s", data_users[i].name);
-        printf("\nApellido: %s", data_users[i].lastname);
-        printf("\nNumber phone: %s | size: %i", data_users[i].phone_number, strlen(data_users[i].phone_number));
-        printf("\nNumber card: %s | size: %i", data_users[i].number_card, strlen(data_users[i].number_card));
-        printf("\nNIP: %4s", data_users[i].nip);
-        printf("\nSaldo: %i", data_users[i].saldo);
+    int i;
+    printf("+-----------------+-----------------+--------------+------------------+------+------------+\n");
+    printf("| %-15s | %-15s | %-12s | %-16s | %-4s | %-10s |\n", 
+            "First Name", "Last Name", "Phone", "Card Number", "NIP", "Saldo");
+
+    for (i = 0; i < cont_users; i++) {
+    printf("+-----------------+-----------------+--------------+------------------+------+------------+\n");
+        printf("| %-15s | %-15s | %-12s | %-16s | %-4s | %10d |\n",
+            data_users[i].name,
+            data_users[i].lastname,
+            data_users[i].phone_number,
+            data_users[i].number_card,
+            data_users[i].nip,
+            data_users[i].saldo);
     }
+    printf("+-----------------+-----------------+--------------+------------------+------+------------+\n");
+
 }

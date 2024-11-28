@@ -120,20 +120,17 @@ void add_new_user()
     printf("\n------------------------------------");
     printf("\nIngresa tu nombre: ");
     scanf("%49s", u1.name); 
-    getchar();
     fflush(stdin);
     
     printf("\nIngresa tu apellido: ");
-    scanf("%49s", u1.lastname);
-    getchar();
+    scanf("%49s", u1.lastname);    
     fflush(stdin);
 
   
 	do{
 		
 		printf("\nIngresa tu numero de telefono (10 digitos): ");
-    	scanf("%11s", u1.phone_number);
-    	getchar();
+    	scanf("%11s", u1.phone_number);    	
     	fflush(stdin);
     	
     	if(strlen(u1.phone_number) == 10){
@@ -147,8 +144,7 @@ void add_new_user()
     
     do{
     	printf("\nIngresa tu numero de tarjeta (16 digitos): ");
-    	scanf("%17s", u1.number_card);
-    	getchar();
+    	scanf("%17s", u1.number_card);    	
     	fflush(stdin);
     	if(strlen(u1.number_card) == 16){
     		band==1;
@@ -162,8 +158,7 @@ void add_new_user()
 	
 	do{
 		printf("\nIngresa tu NIP (4 digitos): ");
-    	scanf("%5s", u1.nip);
-    	getchar();
+    	scanf("%5s", u1.nip);    
     	fflush(stdin);
     	
 		if(strlen(u1.nip) == 4){
@@ -198,8 +193,7 @@ void deposit_own_acc()
 
     printf("\n------------------------------------");
         printf("\nIngresa tu n%cmero de telefono: ",163);
-        scanf("%10s", verification_pnum);
-        getchar();
+        scanf("%10s", verification_pnum);        
         fflush(stdin);
         
         for (i = 0; i < cont_users; i++)
@@ -212,8 +206,7 @@ void deposit_own_acc()
             {
                 printf("\n------------------------------------");
                 printf("\nIngresa tu NIP: ");
-                scanf("%4s", verification_nip);
-                getchar();
+                scanf("%4s", verification_nip);                
                 fflush(stdin);
 
                 // printf("usuario encontrado %s | nip ingresado %s | nip del usuario %s", data_users[i].name, verification_nip, data_users[i].nip);
@@ -242,8 +235,7 @@ void deposit_own_acc()
             printf("\n------------------------------------");
             menu_chiquito();
 
-            scanf("%i", &new_try);
-            getchar();
+            scanf("%i", &new_try);            
             fflush(stdin);
 
             if (new_try == 1)
@@ -273,8 +265,7 @@ void deposit_own_acc()
                 scanf("%i", &cant_a_depositar);
 
                 printf("\nTodo esta correcto? \n1.Si \n2.No \n3.Salir\n: ");
-                scanf("%i", &validador);
-                getchar();
+                scanf("%i", &validador);                
                 if (validador == 2)
                 {
                     system("cls");
@@ -327,6 +318,7 @@ void check_card()
         printf("\nIngresa tu n%cmero de telefono: ",163);
         scanf("%10s", &number_phone);
         getchar();
+        fflush(stdin);
 
         // printf("%10s", &number_phone);
         for (i = 0; i < cont_users; i++)
@@ -338,6 +330,7 @@ void check_card()
 
                 printf("\nIngresa tu NIP: ");
                 scanf("%4s", &nip);
+                fflush(stdin);
 
                 if (strcmp(nip, data_users[i].nip) == 0)
                 {
@@ -382,7 +375,6 @@ void transfer_money()
 
         printf("\nIngresa tu n%cmero de tel%cfono: ",163,130);
         scanf("%10s", &verification_pnum);
-        getchar();
         fflush(stdin);
 
         for (i = 0; i < cont_users; i++)
@@ -391,7 +383,6 @@ void transfer_money()
             {
                 printf("\nIngresa tu NIP: ");
                 scanf("%4s", &verification_nip);
-                getchar();
                 fflush(stdin);
 
                 if (strcmp(verification_nip, data_users[i].nip) == 0)
@@ -417,7 +408,6 @@ void transfer_money()
             menu_chiquito();
 
             scanf("%i", &new_try);
-            getchar();
        		fflush(stdin);
 
             if (new_try == 1)
@@ -440,7 +430,6 @@ void transfer_money()
             	do{				
                 printf("Ingresa cuanto quieres transferir?: \n");
                 scanf("%i", &transferencia);
-                getchar();
                 fflush(stdin);
                 
 				if(transferencia>0){
@@ -452,7 +441,6 @@ void transfer_money()
                 
                     printf("\nIngresa el n%cmero de tarjeta a la que deseas transferir: ",163);
                     scanf("%s", &verification_card);
-                    getchar();
                     fflush(stdin);                    
                    
 
@@ -466,7 +454,7 @@ void transfer_money()
                             printf("\nEl n%cmero de cuenta %s pertenece a %s %s \n",163, verification_card, data_users[i].name, data_users[i].lastname);
                             printf("\nEstas seguro de que quieres transferirle %i pesos? \n1.Si \n2.No: ", transferencia);
                             scanf("%i", &verification_transfer);
-                            getchar();
+                            fflush(stdin);
 
                             if (verification_transfer == 1)
                             {
@@ -527,7 +515,6 @@ void change_nip()
 
         printf("\nIngresa tu n%cmero de telefono: ",163);
         scanf("%10s", verification_pnum);
-        getchar();
         fflush(stdin);
 
         for (i = 0; i < cont_users; i++)
@@ -536,7 +523,6 @@ void change_nip()
             {
                 printf("\nIngresa tu NIP: ");
                 scanf("%4s", verification_nip);
-                getchar();
                 fflush(stdin);
 
                 res = strcmp(verification_nip, data_users[i].nip);
@@ -569,15 +555,15 @@ void change_nip()
                 char new_nip_confirm[5], new_nip[5];
                 printf("\nIngrese su nuevo NIP: ");
                 scanf("%4s", new_nip);
-                getchar();
+               	fflush(stdin);
 
                 printf("\nIngrese de nuevo su nuevo NIP: ");
                 scanf("%4s", new_nip_confirm);
-                getchar();
+                fflush(stdin);
 
                 printf("\nLos datos ingresados son coorrectos? \n1 - Si\n2 - No\nIngrese su opcion: ");
                 scanf("%i", &confirm_change_nip);
-                getchar();
+                fflush(stdin);
 
                 if (confirm_change_nip == 1)
                 {

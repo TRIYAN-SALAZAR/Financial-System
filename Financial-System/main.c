@@ -15,6 +15,8 @@ void recharge_airtime();
 void change_nip();
 void show_users();
 
+int validation_user(char number_card[16], char nip[4]);
+
 int cont_users = 3;
 
 struct Users data_users[50];
@@ -709,6 +711,32 @@ void recharge_airtime()
     } while (1);
 }
 
+int validation_user(char number_card[16], char nip[4])
+{
+    int i, validador = 0;
+
+    for (i = 0; i < cont_users; i++)
+    {
+        if (strcmp(data_users[i].number_card, number_card) == 0)
+        {
+            if (strcmp(data_users[i].nip, nip) == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                printf("\nEl NIP ingresado es incorrecto, vuelve a ingresar las credentiales");
+                return 0;
+            }
+            
+        }
+    }
+
+    printf("\nEl n%cmero de tarjeta ingresado no pertenece a ning%cn usuario", 163, 163);
+    printf("\nVuelve a intentarlo con un numero de tarjeta diferente\n");
+
+    return -1;
+}
 void show_users()
 {
     int i;

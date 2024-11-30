@@ -15,7 +15,7 @@ void recharge_airtime();
 void change_nip();
 void show_users();
 
-int validation_user(char number_card[16], char nip[4]);
+int validation_user(char number_card[16]);
 
 int cont_users = 3;
 
@@ -194,7 +194,7 @@ void deposit_own_acc()
 {
     do
     {
-        char verification_pnum[10], verification_nip[4];
+        char verification_pnum[10];
 
         int i, validador, index_user, cant_a_depositar;
         int transferencia, verification_transfer;
@@ -202,8 +202,10 @@ void deposit_own_acc()
 
         printf("\n------------------------------------");
         printf("\nIngresa tu n%cmero de telefono: ", 163);
-        scanf("%10s", verification_pnum);
+        scanf("%11s", verification_pnum);
         fflush(stdin);
+
+        printf("\n number phone %10s", verification_pnum);
 
         for (i = 0; i < cont_users; i++)
         {
@@ -211,27 +213,13 @@ void deposit_own_acc()
             // printf("\nusuario encontrado %s | nip del usuario %s\n", data_users[i].name, data_users[i].nip);
             // printf("\n------------------------------------------------------");
 
-            if (strcmp(verification_pnum, data_users[i].phone_number) == 0)
+            int result_verification = validation_user(verification_pnum);
+
+            if (result_verification != -1)
             {
-                printf("\n------------------------------------");
-                printf("\nIngresa tu NIP: ");
-                scanf("%4s", verification_nip);
-                fflush(stdin);
-
-                // printf("usuario encontrado %s | nip ingresado %s | nip del usuario %s", data_users[i].name, verification_nip, data_users[i].nip);
-                int result = strcmp(verification_nip, data_users[i].nip);
-
-                if (result == 0)
-                {
-                    index_user = i;
-                    validar = 1;
-                    // printf("\n\nValidando datos...");
-                    break;
-                }
-                else
-                {
-                    break;
-                }
+                index_user = result_verification;
+                validar = 1;
+                break;
             }
         }
 
@@ -711,29 +699,32 @@ void recharge_airtime()
     } while (1);
 }
 
-int validation_user(char number_card[16], char nip[4])
+int validation_user(char phone_number[10])
 {
+    // printf("\n------------------------------------------------------\n");
     int i, validador = 0;
+    char verification_nip[4];
+    printf("\n %s number phone | nip del usuario %s\n", phone_number);
 
     for (i = 0; i < cont_users; i++)
     {
-        if (strcmp(data_users[i].number_card, number_card) == 0)
+        if (strcmp(data_users[i].phone_number, phone_number) == 0)
         {
-            if (strcmp(data_users[i].nip, nip) == 0)
+            printf("\n------------------------------------");
+            printf("\nIngresa tu NIP: ");
+            scanf("%4s", verification_nip);
+
+            fflush(stdin);
+            if (strcmp(data_users[i].nip, verification_nip) == 0)
             {
-                return 1;
+                return i;
             }
             else
             {
                 printf("\nEl NIP ingresado es incorrecto, vuelve a ingresar las credentiales");
-                return 0;
             }
-            
         }
     }
-
-    printf("\nEl n%cmero de tarjeta ingresado no pertenece a ning%cn usuario", 163, 163);
-    printf("\nVuelve a intentarlo con un numero de tarjeta diferente\n");
 
     return -1;
 }

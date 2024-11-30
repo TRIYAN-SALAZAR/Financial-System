@@ -15,7 +15,7 @@ void recharge_airtime();
 void change_nip();
 void show_users();
 
-int validation_user(char number_card[16]);
+int validation_user();
 
 int cont_users = 3;
 
@@ -194,33 +194,27 @@ void deposit_own_acc()
 {
     do
     {
-        char verification_pnum[10];
+        // char verification_pnum[10];
 
         int i, validador, index_user, cant_a_depositar;
         int transferencia, verification_transfer;
         int validar = 0, new_try = 0;
 
+        // printf("\n------------------------------------");
+        // printf("\nIngresa tu n%cmero de telefono: ", 163);
+        // scanf("%11s", verification_pnum);
+        // fflush(stdin);
+
+        // printf("\n number phone %10s", verification_pnum);
+
+        int result_verification = validation_user();
         printf("\n------------------------------------");
-        printf("\nIngresa tu n%cmero de telefono: ", 163);
-        scanf("%11s", verification_pnum);
-        fflush(stdin);
+        printf("\n%i", result_verification);
 
-        printf("\n number phone %10s", verification_pnum);
-
-        for (i = 0; i < cont_users; i++)
+        if (result_verification != -1)
         {
-            // printf("\n------------------------------------------------------");
-            // printf("\nusuario encontrado %s | nip del usuario %s\n", data_users[i].name, data_users[i].nip);
-            // printf("\n------------------------------------------------------");
-
-            int result_verification = validation_user(verification_pnum);
-
-            if (result_verification != -1)
-            {
-                index_user = result_verification;
-                validar = 1;
-                break;
-            }
+            index_user = result_verification;
+            validar = 1;
         }
 
         if (validar == 0)
@@ -699,23 +693,35 @@ void recharge_airtime()
     } while (1);
 }
 
-int validation_user(char phone_number[10])
+int validation_user()
 {
     // printf("\n------------------------------------------------------\n");
+    char nip[4], phone_number[10];
     int i, validador = 0;
-    char verification_nip[4];
-    printf("\n %s number phone | nip del usuario %s\n", phone_number);
+
+    printf("\n------------------------------------");
+    printf("\nIngresa tu n%cmero de telefono: ", 163);
+    scanf("%11s", phone_number);
+    fflush(stdin);
+
+    printf("\n number phone %10s", phone_number);
 
     for (i = 0; i < cont_users; i++)
     {
+        printf("\n------------------------------------");
+        printf("\nuser phone number %10s || user %s", data_users[i].phone_number, data_users[i].name);
+
         if (strcmp(data_users[i].phone_number, phone_number) == 0)
         {
             printf("\n------------------------------------");
             printf("\nIngresa tu NIP: ");
-            scanf("%4s", verification_nip);
-
+            scanf("%4s", nip);
             fflush(stdin);
-            if (strcmp(data_users[i].nip, verification_nip) == 0)
+
+            printf("\n------------------------------------");
+            printf("\nNIP: %s", data_users[i].nip);
+
+            if (strcmp(data_users[i].nip, nip) == 0)
             {
                 return i;
             }

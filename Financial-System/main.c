@@ -194,18 +194,10 @@ void deposit_own_acc()
 {
     do
     {
-        // char verification_pnum[10];
 
         int i, validador, index_user, cant_a_depositar;
         int transferencia, verification_transfer;
         int validar = 0, new_try = 0;
-
-        // printf("\n------------------------------------");
-        // printf("\nIngresa tu n%cmero de telefono: ", 163);
-        // scanf("%11s", verification_pnum);
-        // fflush(stdin);
-
-        // printf("\n number phone %10s", verification_pnum);
 
         int result_verification = validation_user();
         printf("\n------------------------------------");
@@ -695,7 +687,6 @@ void recharge_airtime()
 
 int validation_user()
 {
-    // printf("\n------------------------------------------------------\n");
     char nip[4], phone_number[10];
     int i, validador = 0;
 
@@ -704,12 +695,8 @@ int validation_user()
     scanf("%11s", phone_number);
     fflush(stdin);
 
-    printf("\n number phone %10s", phone_number);
-
     for (i = 0; i < cont_users; i++)
     {
-        printf("\n------------------------------------");
-        printf("\nuser phone number %10s || user %s", data_users[i].phone_number, data_users[i].name);
 
         if (strcmp(data_users[i].phone_number, phone_number) == 0)
         {
@@ -717,9 +704,6 @@ int validation_user()
             printf("\nIngresa tu NIP: ");
             scanf("%4s", nip);
             fflush(stdin);
-
-            printf("\n------------------------------------");
-            printf("\nNIP: %s", data_users[i].nip);
 
             if (strcmp(data_users[i].nip, nip) == 0)
             {

@@ -21,7 +21,7 @@ struct Users data_users[50];
 
 int main()
 {
-    
+
     strcpy(data_users[0].name, "Jorge");
     strcpy(data_users[0].lastname, "Ozuna");
     strcpy(data_users[0].phone_number, "3333333333");
@@ -43,7 +43,6 @@ int main()
     strcpy(data_users[2].nip, "1234");
     data_users[2].saldo = 1000;
 
-   
     int band = 1;
     do
     {
@@ -88,7 +87,7 @@ int main()
             break;
         }
     } while (band == 1);
-    
+
     getch();
     return 0;
 }
@@ -111,74 +110,82 @@ void menu_chiquito()
 {
     printf("\n1 - Si");
     printf("\n2 - No");
-    printf("\nIngrese su opci%cn: ",162);
+    printf("\nIngrese su opci%cn: ", 162);
 }
 void add_new_user()
 {
-    struct Users u1; 
-    int band=0;
+    struct Users u1;
+    int band = 0;
     printf("\n------------------------------------");
     printf("\nIngresa tu nombre: ");
-    scanf("%49s", u1.name); 
-    fflush(stdin);
-    
-    printf("\nIngresa tu apellido: ");
-    scanf("%49s", u1.lastname);    
+    scanf("%49s", u1.name);
     fflush(stdin);
 
-  
-	do{
-		
-		printf("\nIngresa tu numero de telefono (10 digitos): ");
-    	scanf("%11s", u1.phone_number);    	
-    	fflush(stdin);
-    	
-    	if(strlen(u1.phone_number) == 10){
-    		band==1;
-    		break;    		
-		}else{
-			printf("Por favor ingresa un numero de 10 digitos");
-			band=0;
-		}
-	}while(band==0);
-    
-    do{
-    	printf("\nIngresa tu numero de tarjeta (16 digitos): ");
-    	scanf("%17s", u1.number_card);    	
-    	fflush(stdin);
-    	if(strlen(u1.number_card) == 16){
-    		band==1;
-    		break;    		
-		}else{
-			printf("\nPor favor ingresa un numero de 16 digitos para la tarjeta:");
-			band=0;
-		}
-    		
-	}while(band==0);
-	
-	do{
-		printf("\nIngresa tu NIP (4 digitos): ");
-    	scanf("%5s", u1.nip);    
-    	fflush(stdin);
-    	
-		if(strlen(u1.nip) == 4){
-    		band==1;
-    		break;    		
-		}else{
-			printf("\nPor favor ingresa un numero de 4 digitos \n");
-			band=0;
-		}				
-		
-	}while(band==0);
-	printf("\n------------------------------------");
-   
-    
+    printf("\nIngresa tu apellido: ");
+    scanf("%49s", u1.lastname);
+    fflush(stdin);
+
+    do
+    {
+
+        printf("\nIngresa tu numero de telefono (10 digitos): ");
+        scanf("%11s", u1.phone_number);
+        fflush(stdin);
+
+        if (strlen(u1.phone_number) == 10)
+        {
+            band == 1;
+            break;
+        }
+        else
+        {
+            printf("Por favor ingresa un numero de 10 digitos");
+            band = 0;
+        }
+    } while (band == 0);
+
+    do
+    {
+        printf("\nIngresa tu numero de tarjeta (16 digitos): ");
+        scanf("%17s", u1.number_card);
+        fflush(stdin);
+        if (strlen(u1.number_card) == 16)
+        {
+            band == 1;
+            break;
+        }
+        else
+        {
+            printf("\nPor favor ingresa un numero de 16 digitos para la tarjeta:");
+            band = 0;
+        }
+
+    } while (band == 0);
+
+    do
+    {
+        printf("\nIngresa tu NIP (4 digitos): ");
+        scanf("%5s", u1.nip);
+        fflush(stdin);
+
+        if (strlen(u1.nip) == 4)
+        {
+            band == 1;
+            break;
+        }
+        else
+        {
+            printf("\nPor favor ingresa un numero de 4 digitos \n");
+            band = 0;
+        }
+
+    } while (band == 0);
+    printf("\n------------------------------------");
 
     u1.saldo = 0;
     data_users[cont_users] = u1; // Guardar los datos ingresados en el arreglo del struct
     cont_users++;
     printf("\n\nTu registro fue exitoso, regresando al menu...\n");
-
 }
 
 void deposit_own_acc()
@@ -191,11 +198,11 @@ void deposit_own_acc()
         int transferencia, verification_transfer;
         int validar = 0, new_try = 0;
 
-    printf("\n------------------------------------");
-        printf("\nIngresa tu n%cmero de telefono: ",163);
-        scanf("%10s", verification_pnum);        
+        printf("\n------------------------------------");
+        printf("\nIngresa tu n%cmero de telefono: ", 163);
+        scanf("%10s", verification_pnum);
         fflush(stdin);
-        
+
         for (i = 0; i < cont_users; i++)
         {
             // printf("\n------------------------------------------------------");
@@ -206,7 +213,7 @@ void deposit_own_acc()
             {
                 printf("\n------------------------------------");
                 printf("\nIngresa tu NIP: ");
-                scanf("%4s", verification_nip);                
+                scanf("%4s", verification_nip);
                 fflush(stdin);
 
                 // printf("usuario encontrado %s | nip ingresado %s | nip del usuario %s", data_users[i].name, verification_nip, data_users[i].nip);
@@ -235,7 +242,7 @@ void deposit_own_acc()
             printf("\n------------------------------------");
             menu_chiquito();
 
-            scanf("%i", &new_try);            
+            scanf("%i", &new_try);
             fflush(stdin);
 
             if (new_try == 1)
@@ -245,7 +252,7 @@ void deposit_own_acc()
             }
             else
             {
-                printf("\nRegresando al men%c principal...",163);
+                printf("\nRegresando al men%c principal...", 163);
                 break;
             }
         }
@@ -265,7 +272,7 @@ void deposit_own_acc()
                 scanf("%i", &cant_a_depositar);
 
                 printf("\nTodo esta correcto? \n1.Si \n2.No \n3.Salir\n: ");
-                scanf("%i", &validador);                
+                scanf("%i", &validador);
                 if (validador == 2)
                 {
                     system("cls");
@@ -291,7 +298,7 @@ void deposit_own_acc()
                 printf("\nEl deposito de hizo con exito!");
                 printf("\nSe deposito a la cuenta de %s %s", data_users[index_user].name, data_users[index_user].lastname);
                 printf("\nSe depositaron %i pesos", cant_a_depositar);
-                printf("\nA la tarjeta con n%cmero %s",163,data_users[index_user].number_card);
+                printf("\nA la tarjeta con n%cmero %s", 163, data_users[index_user].number_card);
                 printf("\nTu saldo es de %i pesos", data_users[index_user].saldo);
                 printf("\nRegresando al menu principal...");
                 getch();
@@ -301,7 +308,7 @@ void deposit_own_acc()
 
             if (validador == 3)
             {
-                printf("\nRegresando al men%c principal...",163);
+                printf("\nRegresando al men%c principal...", 163);
                 break;
             }
         } // fin del if si puso bien sus datos
@@ -315,7 +322,7 @@ void check_card()
         char nip[4], number_phone[10], confirmate_nip[4], confirmate_number_phone[10];
         int i, correct_number_phone = 0, leave = 0;
 
-        printf("\nIngresa tu n%cmero de telefono: ",163);
+        printf("\nIngresa tu n%cmero de telefono: ", 163);
         scanf("%10s", &number_phone);
         getchar();
         fflush(stdin);
@@ -353,7 +360,7 @@ void check_card()
 
         if (correct_number_phone == 0)
         {
-            printf("\nEl n%cmero de telefono ingresado no existe",163);
+            printf("\nEl n%cmero de telefono ingresado no existe", 163);
             printf("\nIntroduzca los datos nuevamente");
         }
 
@@ -366,14 +373,14 @@ void check_card()
 
 void transfer_money()
 {
-    
+
     do
     {
         char verification_pnum[10], verification_nip[4], verification_card[16], persona_deposito[50];
         int i, transferencia, verification_transfer, cliente, new_try;
         int validador = 0, is_num_card_found = 0;
 
-        printf("\nIngresa tu n%cmero de tel%cfono: ",163,130);
+        printf("\nIngresa tu n%cmero de tel%cfono: ", 163, 130);
         scanf("%10s", &verification_pnum);
         fflush(stdin);
 
@@ -402,13 +409,13 @@ void transfer_money()
 
         if (validador == 0)
         {
-            printf("\nLos datos ingresados son err%cneos o no existe el usuario",162);
+            printf("\nLos datos ingresados son err%cneos o no existe el usuario", 162);
             printf("\nDesea volver a intentarlo?");
 
             menu_chiquito();
 
             scanf("%i", &new_try);
-       		fflush(stdin);
+            fflush(stdin);
 
             if (new_try == 1)
             {
@@ -417,7 +424,7 @@ void transfer_money()
             }
             else
             {
-                printf("\nRegresando al men%c principal...",163);
+                printf("\nRegresando al men%c principal...", 163);
                 break;
             }
         }
@@ -426,71 +433,72 @@ void transfer_money()
         { // inicio del if si puso bien sus datos
             do
             {
-            	int band2=0;
-            	do{				
-                printf("Ingresa cuanto quieres transferir?: \n");
-                scanf("%i", &transferencia);
-                fflush(stdin);
-                
-				if(transferencia>0){
-				band2=1;
-
-                if (data_users[cliente].saldo >= transferencia)
+                int band2 = 0;
+                do
                 {
-                	
-                
-                    printf("\nIngresa el n%cmero de tarjeta a la que deseas transferir: ",163);
-                    scanf("%s", &verification_card);
-                    fflush(stdin);                    
-                   
+                    printf("Ingresa cuanto quieres transferir?: \n");
+                    scanf("%i", &transferencia);
+                    fflush(stdin);
 
-                    for (i = 0; i < cont_users; i++)
-                    {        	      
-                                  	
-    					
-                        if (strcmp(verification_card, data_users[i].number_card) == 0)
+                    if (transferencia > 0)
+                    {
+                        band2 = 1;
+
+                        if (data_users[cliente].saldo >= transferencia)
                         {
-                        	
-                            printf("\nEl n%cmero de cuenta %s pertenece a %s %s \n",163, verification_card, data_users[i].name, data_users[i].lastname);
-                            printf("\nEstas seguro de que quieres transferirle %i pesos? \n1.Si \n2.No: ", transferencia);
-                            scanf("%i", &verification_transfer);
+
+                            printf("\nIngresa el n%cmero de tarjeta a la que deseas transferir: ", 163);
+                            scanf("%s", &verification_card);
                             fflush(stdin);
 
-                            if (verification_transfer == 1)
+                            for (i = 0; i < cont_users; i++)
                             {
-                                is_num_card_found = 1;
 
-                                data_users[i].saldo += transferencia;
-                                data_users[cliente].saldo -= transferencia;
+                                if (strcmp(verification_card, data_users[i].number_card) == 0)
+                                {
 
-                                printf("\nSe transfirio %i pesos a %s %s", transferencia, data_users[i].name, data_users[i].lastname);
-                                printf("\nCon n%cmero de cuenta %s", 163,verification_card);
-                                printf("\nTransferencia exitosa :)");
+                                    printf("\nEl n%cmero de cuenta %s pertenece a %s %s \n", 163, verification_card, data_users[i].name, data_users[i].lastname);
+                                    printf("\nEstas seguro de que quieres transferirle %i pesos? \n1.Si \n2.No: ", transferencia);
+                                    scanf("%i", &verification_transfer);
+                                    fflush(stdin);
 
-                                break;
+                                    if (verification_transfer == 1)
+                                    {
+                                        is_num_card_found = 1;
+
+                                        data_users[i].saldo += transferencia;
+                                        data_users[cliente].saldo -= transferencia;
+
+                                        printf("\nSe transfirio %i pesos a %s %s", transferencia, data_users[i].name, data_users[i].lastname);
+                                        printf("\nCon n%cmero de cuenta %s", 163, verification_card);
+                                        printf("\nTransferencia exitosa :)");
+
+                                        break;
+                                    }
+                                    if (verification_transfer == 0)
+                                    {
+                                        printf("Vuelve a ingresar los datos de la transferencia");
+                                        break;
+                                    }
+                                }
                             }
-                            if (verification_transfer == 0)
+
+                            if (is_num_card_found == 0)
                             {
-                                printf("Vuelve a ingresar los datos de la transferencia");
-                                break;
+                                printf("\nEl n%cmero de tarjeta ingresado no pertenece a ning%cn usuario", 163, 163);
+                                printf("\nVuelve a intentarlo con un numero de tarjeta diferente\n");
                             }
-                        }  
+                        }
+                        else
+                        {
+                            printf("\nNo tienes los suficientes fondos, vuelve a intentarlo con un monto menor\n");
+                        }
                     }
-
-                    if (is_num_card_found == 0)
+                    else
                     {
-                        printf("\nEl n%cmero de tarjeta ingresado no pertenece a ning%cn usuario",163,163);
-                        printf("\nVuelve a intentarlo con un numero de tarjeta diferente\n");
+                        printf("No puedes depositar con n%cmeros negativos\n", 163);
                     }
-                }
-                else
-                {
-                    printf("\nNo tienes los suficientes fondos, vuelve a intentarlo con un monto menor\n");
-                }
-               }else{
-               		printf("No puedes depositar con n%cmeros negativos\n",163);
-			   }
-			  }while(band2==0);
+                } while (band2 == 0);
                 if (verification_transfer == 1)
                 {
                     break;
@@ -513,7 +521,7 @@ void change_nip()
         int i, phone_number, nip, validador, index_user, res;
         int confirm_change_nip = 0, validar = 0;
 
-        printf("\nIngresa tu n%cmero de telefono: ",163);
+        printf("\nIngresa tu n%cmero de telefono: ", 163);
         scanf("%10s", verification_pnum);
         fflush(stdin);
 
@@ -555,7 +563,7 @@ void change_nip()
                 char new_nip_confirm[5], new_nip[5];
                 printf("\nIngrese su nuevo NIP: ");
                 scanf("%4s", new_nip);
-               	fflush(stdin);
+                fflush(stdin);
 
                 printf("\nIngrese de nuevo su nuevo NIP: ");
                 scanf("%4s", new_nip_confirm);
@@ -639,7 +647,7 @@ void recharge_airtime()
         {
             printf("\nEse numero de telefono no existe, vuelve a intentarlo\n");
         }
-		
+
         if (validador == 1)
         {
             do
@@ -647,7 +655,6 @@ void recharge_airtime()
                 printf("%s ", data_users[i].name);
                 printf("%s \n", data_users[i].lastname);
                 printf("Saldo: %i pesos\n", data_users[i].saldo);
-                
 
                 printf("A que compania quiere hacer la recarga de tiempo aire?\n1. AT%cT\n2. Telcel\n3. Movistar: ", 38);
                 scanf("%i", &compania);
@@ -658,7 +665,7 @@ void recharge_airtime()
                 scanf("%i", &cantidad_transferencia);
                 getchar();
                 fflush(stdin);
-				
+
                 printf("A que numero quieres transferirlo?: ");
                 scanf("%s", &pnum_to_transfer[0]);
                 getchar();
@@ -700,26 +707,25 @@ void recharge_airtime()
         }
 
     } while (1);
- 
 }
 
 void show_users()
 {
     int i;
     printf("+-----------------+-----------------+--------------+------------------+------+------------+\n");
-    printf("| %-15s | %-15s | %-12s | %-16s | %-4s | %-10s |\n", 
-            "First Name", "Last Name", "Phone", "Card Number", "NIP", "Saldo");
+    printf("| %-15s | %-15s | %-12s | %-16s | %-4s | %-10s |\n",
+           "First Name", "Last Name", "Phone", "Card Number", "NIP", "Saldo");
 
-    for (i = 0; i < cont_users; i++) {
-    printf("+-----------------+-----------------+--------------+------------------+------+------------+\n");
+    for (i = 0; i < cont_users; i++)
+    {
+        printf("+-----------------+-----------------+--------------+------------------+------+------------+\n");
         printf("| %-15s | %-15s | %-12s | %-16s | %-4s | %10d |\n",
-            data_users[i].name,
-            data_users[i].lastname,
-            data_users[i].phone_number,
-            data_users[i].number_card,
-            data_users[i].nip,
-            data_users[i].saldo);
+               data_users[i].name,
+               data_users[i].lastname,
+               data_users[i].phone_number,
+               data_users[i].number_card,
+               data_users[i].nip,
+               data_users[i].saldo);
     }
     printf("+-----------------+-----------------+--------------+------------------+------+------------+\n");
-
 }

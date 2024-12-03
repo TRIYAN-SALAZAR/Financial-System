@@ -440,30 +440,14 @@ void change_nip()
 {
     do
     {
-        char verification_pnum[10], verification_nip[4];
-        int i, phone_number, nip, validador, index_user, res;
-        int confirm_change_nip = 0, validar = 0;
+        int i, validador, index_user, res;
+        int confirm_change_nip = 0;
+        int result_verification = validation_user();
 
-        printf("\nIngresa tu n%cmero de telefono: ", 163);
-        scanf("%10s", verification_pnum);
-        fflush(stdin);
-
-        for (i = 0; i < cont_users; i++)
+        if(result_verification != -1)
         {
-            if (strcmp(verification_pnum, data_users[i].phone_number) == 0)
-            {
-                printf("\nIngresa tu NIP: ");
-                scanf("%4s", verification_nip);
-                fflush(stdin);
-
-                res = strcmp(verification_nip, data_users[i].nip);
-
-                if (res == 0)
-                {
-                    index_user = i;
-                    validador = 1;
-                }
-            }
+            index_user = result_verification;
+            validador = 1;    
         }
 
         if (validador == 0)

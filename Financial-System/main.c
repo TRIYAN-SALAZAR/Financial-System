@@ -200,8 +200,6 @@ void deposit_own_acc()
         int validar = 0, new_try = 0;
 
         int result_verification = validation_user();
-        printf("\n------------------------------------");
-        printf("\n%i", result_verification);
 
         if (result_verification != -1)
         {
@@ -295,55 +293,18 @@ void check_card()
 {
     do
     {
-        char nip[4], number_phone[10], confirmate_nip[4], confirmate_number_phone[10];
-        int i, correct_number_phone = 0, leave = 0;
+        int result_verification = validation_user(), i;
 
-        printf("\nIngresa tu n%cmero de telefono: ", 163);
-        scanf("%10s", &number_phone);
-        getchar();
-        fflush(stdin);
-
-        // printf("%10s", &number_phone);
-        for (i = 0; i < cont_users; i++)
+        if (result_verification != -1)
         {
-            int res = strcmp(number_phone, data_users[i].phone_number);
-            if (res == 0)
-            {
-                correct_number_phone = 1;
+            i = result_verification;
 
-                printf("\nIngresa tu NIP: ");
-                scanf("%4s", &nip);
-                fflush(stdin);
-
-                if (strcmp(nip, data_users[i].nip) == 0)
-                {
-
-                    printf("%s ", data_users[i].name);
-                    printf("%s", data_users[i].lastname);
-                    printf("\nTu saldo es de: %i pesos", data_users[i].saldo);
-
-                    leave = 1;
-                    break;
-                }
-                else
-                {
-                    printf("\nEl nip ingresado es incorrecto");
-                    printf("\nVuelve a introducir los datos");
-                    break;
-                }
-            }
-        }
-
-        if (correct_number_phone == 0)
-        {
-            printf("\nEl n%cmero de telefono ingresado no existe", 163);
-            printf("\nIntroduzca los datos nuevamente");
-        }
-
-        if (leave == 1)
-        {
+            printf("%s ", data_users[i].name);
+            printf("%s", data_users[i].lastname);
+            printf("\nTu saldo es de: %i pesos", data_users[i].saldo);
             break;
         }
+
     } while (1);
 }
 
@@ -688,7 +649,7 @@ void recharge_airtime()
 int validation_user()
 {
     char nip[4], phone_number[10];
-    int i, validador = 0;
+    int i, validador = 0, exist_number_phone = 0;
 
     printf("\n------------------------------------");
     printf("\nIngresa tu n%cmero de telefono: ", 163);
@@ -700,6 +661,9 @@ int validation_user()
 
         if (strcmp(data_users[i].phone_number, phone_number) == 0)
         {
+
+            exist_number_phone = 1;
+
             printf("\n------------------------------------");
             printf("\nIngresa tu NIP: ");
             scanf("%4s", nip);
@@ -712,8 +676,14 @@ int validation_user()
             else
             {
                 printf("\nEl NIP ingresado es incorrecto, vuelve a ingresar las credentiales");
+                break;
             }
         }
+    }
+
+    if (exist_number_phone == 0)
+    {
+        printf("\nEse n%cmero de telefono no existe, vuelve a intentarlo\n", 163);
     }
 
     return -1;

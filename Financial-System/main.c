@@ -313,35 +313,21 @@ void transfer_money()
 
     do
     {
-        char verification_pnum[10], verification_nip[4], verification_card[16], persona_deposito[50];
+        char verification_card[16];
         int i, transferencia, verification_transfer, cliente, new_try;
         int validador = 0, is_num_card_found = 0;
+        int result_verification = validation_user();
 
-        printf("\nIngresa tu n%cmero de tel%cfono: ", 163, 130);
-        scanf("%10s", &verification_pnum);
-        fflush(stdin);
-
-        for (i = 0; i < cont_users; i++)
+        if (result_verification != -1)
         {
-            if (strcmp(verification_pnum, data_users[i].phone_number) == 0)
-            {
-                printf("\nIngresa tu NIP: ");
-                scanf("%4s", &verification_nip);
-                fflush(stdin);
+            i = result_verification;
 
-                if (strcmp(verification_nip, data_users[i].nip) == 0)
-                {
-                    printf("%s ", data_users[i].name);
-                    printf("%s \n", data_users[i].lastname);
-                    printf("Saldo: %i pesos\n", data_users[i].saldo);
-                    cliente = i;   // para si se llega a concluir, saber a quien quitarle dinero
-                    validador = 1; // si sus datos estan bien, seguimos con la siguiente parte
-                }
-                else
-                {
-                    printf("\nLa clave ingresada es incorrecta");
-                }
-            }
+            printf("%s ", data_users[i].name);
+            printf("%s \n", data_users[i].lastname);
+            printf("Saldo: %i pesos\n", data_users[i].saldo);
+            
+            cliente = i;   // para si se llega a concluir, saber a quien quitarle dinero
+            validador = 1; // si sus datos estan bien, seguimos con la siguiente parte
         }
 
         if (validador == 0)

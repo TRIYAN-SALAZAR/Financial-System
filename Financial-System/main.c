@@ -16,6 +16,7 @@ void change_nip();
 void show_users();
 
 int validation_user();
+int introduce_quantity(int type_of_msg);
 
 int cont_users = 3;
 
@@ -535,15 +536,8 @@ void recharge_airtime()
                 printf("%s \n", data_users[i].lastname);
                 printf("Saldo: %i pesos\n", data_users[i].saldo);
 
-                printf("A que compania quiere hacer la recarga de tiempo aire?\n1. AT%cT\n2. Telcel\n3. Movistar: ", 38);
-                scanf("%i", &compania);
-                getchar();
-                fflush(stdin);
-
-                printf("Ingresa la cantidad que quieres recargar: ");
-                scanf("%i", &cantidad_transferencia);
-                getchar();
-                fflush(stdin);
+                compania = introduce_quantity(1);
+                cantidad_transferencia = introduce_quantity(2);
 
                 printf("A que numero quieres transferirlo?: ");
                 scanf("%s", &pnum_to_transfer[0]);
@@ -629,6 +623,25 @@ int validation_user()
     }
 
     return -1;
+}
+
+int introduce_quantity(int type_of_msg)
+{
+    int quantity;
+
+    if (type_of_msg == 1)
+    {
+        printf("\nA que compania quiere hacer la recarga de tiempo aire?\n1. AT%cT\n2. Telcel\n3. Movistar\n", 38);
+    }
+    if (type_of_msg == 2)
+    {
+        printf("\n\nIngresa la cantidad que quieres recargar: ");
+    }
+    
+    scanf("%i", &quantity);
+    fflush(stdin);
+
+    return quantity;
 }
 void show_users()
 {

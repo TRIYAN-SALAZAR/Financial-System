@@ -516,43 +516,15 @@ void recharge_airtime()
 {
     do
     {
-        char verification_pnum[10], verification_nip[4], verification_card[16], pnum_to_transfer[10];
-        int i, new_try, cliente, compania, cantidad_transferencia;
-        int correct_number_phone = 0, leave = 0, validador = 0;
+        char pnum_to_transfer[10];
+        int i, cliente, compania, cantidad_transferencia;
+        int leave = 0, validador = 0;
+        int result_verification = validation_user();
 
-        printf("\nIngresa tu numero de telefono: ");
-        scanf("%10s", &verification_pnum);
-        getchar();
-        fflush(stdin);
-
-        for (i = 0; i < cont_users; i++)
+        if(result_verification != -1)
         {
-            if (strcmp(verification_pnum, data_users[i].phone_number) == 0)
-            {
-                printf("\nIngresa tu NIP: ");
-                scanf("%s", &verification_nip);
-                getchar();
-                fflush(stdin);
-
-                if (strcmp(verification_nip, data_users[i].nip) == 0)
-                {
-                    cliente = i;   // para si se llega a concluir, saber a quien quitarle dinero
-                    validador = 1; // si sus datos estan bien, seguimos con la siguiente parte
-                    correct_number_phone = 1;
-                    break;
-                }
-                else
-                {
-                    printf("\nEl NIP ingresado es incorrecto, vuelve a ingresarlos ota vez");
-                    correct_number_phone = 1;
-                    break;
-                }
-            }
-        }
-        // cuando sus datos ingresados al inicio son erroneos
-        if (correct_number_phone == 0)
-        {
-            printf("\nEse numero de telefono no existe, vuelve a intentarlo\n");
+            i = result_verification;
+            validador = 1;
         }
 
         if (validador == 1)
